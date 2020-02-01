@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Facial ExpressionML</string>
+    <string name="app_name">Facial Expression ML</string>
+    <string name="email_h">Enter Email</string>
+    <string name="password_h">Enter Password</string>
 </resources>
