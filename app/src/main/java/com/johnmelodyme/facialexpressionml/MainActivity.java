@@ -4,7 +4,6 @@ package com.johnmelodyme.facialexpressionml;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;

@@ -22,11 +22,11 @@
 
         <com.wonderkiln.camerakit.CameraView
             android:id="@+id/CAMERA"
-            app:facing="front"
             android:layout_width="238dp"
             android:layout_height="221dp"
             android:layout_gravity="center"
-            android:foregroundGravity="center" />
+            android:foregroundGravity="center"
+            app:ckFacing="front" />
     </FrameLayout>
 
     <RelativeLayout
