@@ -61,7 +61,6 @@ public class Register extends AppCompatActivity {
                 .setCancelable(false)
                 .build();
 
-
         EXISTING.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
