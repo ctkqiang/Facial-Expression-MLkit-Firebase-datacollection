@@ -4,6 +4,14 @@
     package="com.johnmelodyme.facialexpressionml"
     android:installLocation="preferExternal">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/applogo"
@@ -12,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".aboutme"></activity>
+        <activity android:name=".forgetpass"></activity>
+        <activity android:name=".aboutme" />
         <activity
             android:name=".Register"
             android:theme="@style/AppTheme_Fullscreen" />

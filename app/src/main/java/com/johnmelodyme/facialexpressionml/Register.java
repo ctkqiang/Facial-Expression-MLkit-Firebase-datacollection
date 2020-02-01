@@ -1,6 +1,7 @@
 package com.johnmelodyme.facialexpressionml;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * @Author : John Melody Melissa
@@ -25,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Register extends AppCompatActivity {
     private static final String TAG = Register.class.getName();
     private Button REGISTER;
-    private TextView EXISTING;
+    private TextView EXISTING, FORGOT_PASS;
     private EditText EMAIL, PASSWORD;
     private FirebaseAuth FIREBASEAUTH;
 
@@ -39,6 +41,7 @@ public class Register extends AppCompatActivity {
         REGISTER = findViewById(R.id.register);
         EMAIL = findViewById(R.id.email);
         PASSWORD = findViewById(R.id.password);
+        FORGOT_PASS = findViewById(R.id.forgotpass);
         FIREBASEAUTH = FirebaseAuth.getInstance();
 
         EXISTING.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +78,11 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
+                                SweetAlertDialog pDialog = new SweetAlertDialog(Register.this, SweetAlertDialog.PROGRESS_TYPE);
+                                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                                pDialog.setTitleText("Loading.....");
+                                pDialog.setCancelable(false);
+                                pDialog.show();
                                 Intent TOMAIN;
                                 TOMAIN = new Intent(Register.this, MainActivity.class);
                                 startActivity(TOMAIN);
@@ -88,6 +96,13 @@ public class Register extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        FORGOT_PASS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

@@ -6,5 +6,10 @@
     <string name="register">Register</string>
     <string name="login">Login</string>
     <string name="existinguser_login">Already have an Account? Login Here.</string>
-
+    <string name="forgotpass"> Forgot Password? </string>
+    <!-- item -->
+    <string name="signout">Log Out</string>
+    <string name="about">About Developer</string>
+    <string name="frontcamera">Switch Front Camera</string>
+    <string name="profile">Profile</string>
 </resources>
