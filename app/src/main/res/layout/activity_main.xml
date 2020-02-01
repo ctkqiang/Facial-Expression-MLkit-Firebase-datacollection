@@ -45,12 +45,13 @@
 
         <TextView
             android:id="@+id/emotion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="145dp"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:foregroundGravity="top|right|fill"
             android:gravity="right"
             android:text="@string/n"
+            android:textAlignment="center"
             android:textColor="#E91E63"
             android:textStyle="italic" />
     </RelativeLayout>
