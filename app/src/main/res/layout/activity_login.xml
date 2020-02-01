@@ -7,6 +7,23 @@
     android:background="@drawable/galaxy_blur"
     tools:context=".Login">
 
+    <TextView
+        android:id="@+id/forgotpass_loginscreen"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="150dp"
+        android:fontFamily="@font/amita"
+        android:text="@string/forgotpass"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+
     <EditText
         android:id="@+id/email_login"
         android:layout_width="0dp"
@@ -51,13 +68,19 @@
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="303dp"
-        android:layout_height="59dp"
+        android:layout_width="226dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="81dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="64dp"
         android:background="@drawable/ripple"
         android:fontFamily="@font/amita"
         android:text="@string/login"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="420dp" />
+        app:layout_constraintBottom_toTopOf="@+id/forgotpass_loginscreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_login" />
 </androidx.constraintlayout.widget.ConstraintLayout>
