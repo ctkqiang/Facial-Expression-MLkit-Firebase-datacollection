@@ -10,12 +10,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import androidx.annotation.NonNull;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import dmax.dialog.SpotsDialog;
 
 /**
  * @Author : John Melody Melissa
@@ -24,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
+    private android.app.AlertDialog ALERT_PROMPT;
     private FirebaseAuth FIREBASEAUTH;
 
     @Override
@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.w(TAG, "FE" + "onCreate: Starting Application.");
         FIREBASEAUTH = FirebaseAuth.getInstance();
+        ALERT_PROMPT = new SpotsDialog
+                .Builder()
+                .setContext(MainActivity.this)
+                .setMessage("Logging Out...")
+                .setCancelable(false)
+                .build();
     }
 
 
@@ -42,11 +48,18 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
         if (id == R.id.signout){
+            ALERT_PROMPT.show();
             FirebaseAuth.AuthStateListener AUTH;
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FIREBASEAUTH.signOut();
+            FirebaseAuth.getInstance().signOut();
+            Intent backtologin;
+            backtologin = new Intent(MainActivity.this, Login.class);
+            startActivity(backtologin);
+            finish();
+            /*
             AUTH = new FirebaseAuth.AuthStateListener() {
                 @Override
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -59,7 +72,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             };
+             */
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void ROTIBAKAR(String string){
+        Toast.makeText(MainActivity.this, string,
+                Toast.LENGTH_SHORT)
+                .show();
     }
 }
