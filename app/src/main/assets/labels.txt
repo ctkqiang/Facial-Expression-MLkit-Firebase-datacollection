@@ -1,0 +1,8 @@
+happy
+sad
+horny
+disgust
+surprised
+tired
+confused
+neutral

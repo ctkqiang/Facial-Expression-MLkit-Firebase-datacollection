@@ -22,6 +22,12 @@
 
     <string name="emotion">Emotion Confidence: </string>
     <string name="n">null</string>
+    <string name="emo_what">Q1: How do you feel?</string>
 
-
+    <!-- EMOTION  -->
+    <string name="happy">Happy</string>
+    <string name="sad">Sad</string>
+    <string name="neutral">Neutral</string>
+    <string name="dk">I am so clueless</string>
+    <string name="other">Other</string>
 </resources>

@@ -59,9 +59,58 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="358dp"
+        android:layout_height="350dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" >
+
+        <TextView
+            android:id="@+id/question1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/emo_what"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/Happy"
+            android:layout_width="78dp"
+            android:layout_height="23dp"
+            android:text="@string/happy"
+            app:layout_constraintEnd_toStartOf="@+id/Sad"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question1" />
+
+        <CheckBox
+            android:id="@+id/Other"
+            android:layout_width="77dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="116dp"
+            android:text="@string/other"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Neutral"
+            app:layout_constraintTop_toBottomOf="@+id/question1" />
+
+        <CheckBox
+            android:id="@+id/Neutral"
+            android:layout_width="80dp"
+            android:layout_height="23dp"
+            android:text="@string/neutral"
+            app:layout_constraintEnd_toStartOf="@+id/Other"
+            app:layout_constraintStart_toEndOf="@+id/Sad"
+            app:layout_constraintTop_toBottomOf="@+id/question1" />
+
+        <CheckBox
+            android:id="@+id/Sad"
+            android:layout_width="60dp"
+            android:layout_height="23dp"
+            android:text="@string/sad"
+            app:layout_constraintEnd_toStartOf="@+id/Neutral"
+            app:layout_constraintStart_toEndOf="@+id/Happy"
+            app:layout_constraintTop_toBottomOf="@+id/question1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
