@@ -3,4 +3,8 @@
     <string name="email_h">Enter Email</string>
     <string name="password_h">Enter Password</string>
 
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="existinguser_login">Already have an Account? Login Here.</string>
+
 </resources>
