@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "356491062397",
+    "firebase_url": "https://emotion-detection-eb15d.firebaseio.com",
+    "project_id": "emotion-detection-eb15d",
+    "storage_bucket": "emotion-detection-eb15d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356491062397:android:8424aeb49b3e0bdb74d514",
+        "android_client_info": {
+          "package_name": "com.johnmelodyme.emotionrecognition"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356491062397-nfk2mv8oqrjdtop113r20ntidpjgdsgi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.johnmelodyme.emotionrecognition",
+            "certificate_hash": "a44f0a8394a2c488158030a8f9c2efac2245dbb4"
+          }
+        },
+        {
+          "client_id": "356491062397-t4qaputvoh6ciq1q9db154m2l8jhkhsi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS9ZmAXXoJgddWzkKWB4d7sbSXCWl0MDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356491062397-t4qaputvoh6ciq1q9db154m2l8jhkhsi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356491062397:android:84d80d15c3391fca74d514",
+        "android_client_info": {
+          "package_name": "com.johnmelodyme.facialexpressionml"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356491062397-niigqdflfloiltc536cd8aeihmlqbpm5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.johnmelodyme.facialexpressionml",
+            "certificate_hash": "a44f0a8394a2c488158030a8f9c2efac2245dbb4"
+          }
+        },
+        {
+          "client_id": "356491062397-t4qaputvoh6ciq1q9db154m2l8jhkhsi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS9ZmAXXoJgddWzkKWB4d7sbSXCWl0MDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356491062397-t4qaputvoh6ciq1q9db154m2l8jhkhsi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
