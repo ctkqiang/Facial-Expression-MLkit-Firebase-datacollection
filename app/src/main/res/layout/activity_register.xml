@@ -4,16 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Authentication.Register">
+    android:background="@drawable/galaxy"
+    tools:context=".Register">
 
     <EditText
         android:id="@+id/editText3"
-        android:layout_width="262dp"
-        android:layout_height="56dp"
-        android:hint="@string/email_h"
-        android:background=""
+        android:layout_width="303dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/edittext"
         android:ems="10"
+        android:hint="@string/email_h"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="195dp" />
+        android:padding="12dp"
+        android:textColor="@color/textinput"
+        android:textColorHint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="261dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

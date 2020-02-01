@@ -12,12 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".Authentication.Register"></activity>
-        <activity android:name=".Authentication.Login" />
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".Register"
+            android:theme="@style/AppTheme_Fullscreen" />
+        <activity android:name=".Login"
+            android:theme="@style/AppTheme_Fullscreen" />
+        <activity android:name=".MainActivity"/>
+            <activity android:name=".splash"
+                android:theme="@style/AppTheme_Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
