@@ -26,7 +26,16 @@
             android:layout_height="221dp"
             android:layout_gravity="center"
             android:foregroundGravity="center"
-            app:ckFacing="front" />
+            app:ckFacing="front" >
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/gif"
+                android:layout_width="238dp"
+                android:layout_height="221dp"
+                android:layout_gravity="center"
+                android:foregroundGravity="center"
+                android:src="@mipmap/load" />
+        </com.wonderkiln.camerakit.CameraView>
     </FrameLayout>
 
     <RelativeLayout
@@ -46,14 +55,26 @@
 
         <TextView
             android:id="@+id/emotion"
-            android:layout_width="145dp"
+            android:layout_width="128dp"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
+            android:layout_marginStart="11dp"
+            android:layout_toEndOf="@+id/textView3"
             android:foregroundGravity="top|right|fill"
             android:gravity="right"
             android:text="@string/n"
             android:textAlignment="center"
             android:textColor="#E91E63"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/cal"
+            android:layout_width="118dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="22dp"
+            android:text="@string/n_n"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
             android:textStyle="italic" />
     </RelativeLayout>
 

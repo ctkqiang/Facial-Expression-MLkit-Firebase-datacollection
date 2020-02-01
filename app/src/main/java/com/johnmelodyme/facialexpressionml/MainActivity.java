@@ -12,11 +12,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,9 +35,8 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
-
 import java.util.List;
-
+import java.util.Random;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth FIREBASEAUTH;
     private CameraView CAMERA_VIEW;
     private GraphicOverlay GRAPHIC_OVERLAY;
+    TextView Emotion_result, ACCURACY;
+    private CheckBox cb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.w(TAG, "FE" + "onCreate: Starting Application.");
         FIREBASEAUTH = FirebaseAuth.getInstance();
+        Emotion_result = findViewById(R.id.emotion);
+        CAMERA_VIEW = findViewById(R.id.CAMERA);
+        GRAPHIC_OVERLAY = findViewById(R.id.GO);
+        ACCURACY = findViewById(R.id.cal);
+
+        Thread thread = new Thread(){
+          @Override
+          public void run(){
+              try{
+                  while(!isInterrupted()){
+                      Thread.sleep(1000);
+                      runOnUiThread(new Runnable() {
+                          @Override
+                          public void run() {
+                              // TODO CONVERT INT TO STRING
+                              Random random = new Random();
+                              //int RandomData = R.nextInt(EMOTIONS.length);
+                              double classification;
+                              String Data[];
+                              int D, COUNT;
+                              final String E, S;
+                              COUNT = 0;
+                              Data = getResources().getStringArray(R.array.emo);
+                              D = new Random().nextInt(Data.length);
+                              E = Data[D];
+                              classification = random.nextDouble();
+                              S = String.valueOf(classification);
+                              ACCURACY.setText(S);
+                              Emotion_result.setText(E);
+                          }
+                      });
+                  }
+              } catch (InterruptedException e) {
+                  Emotion_result.setText("");
+              }
+          }
+        };
+        thread.start();
         ALERT_PROMPT = new SpotsDialog
                 .Builder()
                 .setContext(MainActivity.this)
@@ -70,18 +110,14 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage("Loading...")
                 .setCancelable(false)
                 .build();
-        CAMERA_VIEW = findViewById(R.id.CAMERA);
-        GRAPHIC_OVERLAY = findViewById(R.id.GO);
 
         CAMERA_VIEW.addCameraKitListener(new CameraKitEventListener() {
             @Override
             public void onEvent(CameraKitEvent cameraKitEvent) {
-
             }
 
             @Override
             public void onError(CameraKitError cameraKitError) {
-
             }
 
             @Override
@@ -96,7 +132,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
+            }
+        });
 
+        CAMERA_VIEW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Emotion_result.setText("");
+                CAMERA_VIEW.start();
+                CAMERA_VIEW.captureImage();
+                GRAPHIC_OVERLAY.clear();
             }
         });
     }
@@ -105,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
     private void PROCESS_FACE_DETECTION(Bitmap bitmap) {
         FirebaseVisionImage firebaseVisionImage;
         firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap);
-
         FirebaseVisionFaceDetectorOptions firebaseVisionFaceDetectorOptions;
         firebaseVisionFaceDetectorOptions = new FirebaseVisionFaceDetectorOptions
                 .Builder()
@@ -134,10 +178,8 @@ public class MainActivity extends AppCompatActivity {
         for (FirebaseVisionFace visionFace : firebaseVisionFaces){
             Rect rect = visionFace.getBoundingBox();
             RectOverlay rectOverlay = new RectOverlay(GRAPHIC_OVERLAY, rect);
-
             GRAPHIC_OVERLAY.add(rectOverlay);
-
-            COUNTER = COUNTER + 1;
+            COUNTER = COUNTER + 0x1;
         }
         LOADING.dismiss();
     }

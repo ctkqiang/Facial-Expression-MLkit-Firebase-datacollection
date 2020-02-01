@@ -22,6 +22,7 @@
 
     <string name="emotion">Emotion Confidence: </string>
     <string name="n">null</string>
+    <string name="n_n">0.000000</string>
     <string name="emo_what">Q1: How do you feel?</string>
 
     <!-- EMOTION  -->

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="emo">
+        <item>Happy</item>
+        <item>Sad</item>
+        <item>Horny</item>
+        <item>Disgust</item>
+        <item>Surprised</item>
+        <item>Tired</item>
+        <item>Angry</item>
+        <item>Confused</item>
+        <item>Neutral</item>
+    </string-array>
+</resources>
