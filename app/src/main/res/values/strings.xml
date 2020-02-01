@@ -16,6 +16,9 @@
     <string name="frontcamera">Switch Front Camera</string>
     <string name="profile">Profile</string>
     <string name="itsok">I Remember My Password Now</string>
+    <string name="a">Please Enter Email</string>
+    <string name="b">Please Enter Password</string>
+    <string name="c">The Password Must Be More Than 6 Letters </string>
 
 
 </resources>
