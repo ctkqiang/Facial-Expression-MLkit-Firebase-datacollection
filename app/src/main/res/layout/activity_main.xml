@@ -55,7 +55,7 @@
 
         <TextView
             android:id="@+id/emotion"
-            android:layout_width="130dp"
+            android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
@@ -69,7 +69,7 @@
 
         <TextView
             android:id="@+id/cal"
-            android:layout_width="136dp"
+            android:layout_width="191dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="0dp"
@@ -236,6 +236,7 @@
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Comment" />
 
