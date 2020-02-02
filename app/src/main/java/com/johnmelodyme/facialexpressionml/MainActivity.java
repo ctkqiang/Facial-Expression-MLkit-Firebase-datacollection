@@ -13,12 +13,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,8 +40,10 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
+
 import java.util.List;
 import java.util.Random;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private GraphicOverlay GRAPHIC_OVERLAY;
     private RadioButton RADhappy, RADsad, RADneutral, RADother;
     private RadioGroup RG_Emotion;
+    private Button OK, SOSO, Pre_Severe, Severe, Analyse;
     TextView Emotion_result, ACCURACY;
     Thread thread;
 
@@ -74,8 +80,13 @@ public class MainActivity extends AppCompatActivity {
         RADsad = findViewById(R.id.Sad);
         RADother = findViewById(R.id.Other);
         RG_Emotion = findViewById(R.id.RADIO_GROUP_EMOTION);
+        OK = findViewById(R.id.ok);
+        SOSO = findViewById(R.id.soso);
+        Pre_Severe = findViewById(R.id.presevere);
+        Severe = findViewById(R.id.severe);
+        Analyse = findViewById(R.id.analyse);
 
-         thread = new Thread() {
+        thread = new Thread() {
             @Override
             public void run() {
                 try {
@@ -157,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
                 GRAPHIC_OVERLAY.clear();
             }
         });
+
+
 
     }
 
