@@ -191,53 +191,53 @@ public class MainActivity extends AppCompatActivity {
 //                    ROTIBAKAR("Please Select Your Stress Level");
 //                } else {}
                 if (OK.isChecked() || RADhappy.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Happy, Stress-Level: 0%");
-                    Analyse.setText(DONE);
                 } else if (SOSO.isChecked() || RADhappy.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Happy, Stress-Level: 25%");
-                    Analyse.setText(DONE);
                 } else if (Pre_Severe.isChecked() || RADhappy.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Happy, Stress-Level: 50%");
-                    Analyse.setText(DONE);
                 } else if (Severe.isChecked() || RADhappy.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Happy, Stress-Level: 100%");
-                    Analyse.setText(DONE);
                 } else if (OK.isChecked() || RADsad.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Sad, Stress-Level: 0%");
-                    Analyse.setText(DONE);
                 } else if (SOSO.isChecked() || RADsad.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Sad, Stress-Level: 25%");
-                    Analyse.setText(DONE);
                 } else if (Pre_Severe.isChecked() || RADsad.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Sad, Stress-Level: 50%");
-                    Analyse.setText(DONE);
                 } else if (Severe.isChecked() || RADsad.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Sad, Stress-Level: 100%");
-                    Analyse.setText(DONE);
                 } else if (OK.isChecked() || RADneutral.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Neutral, Stress-Level: 0%");
-                    Analyse.setText(DONE);
                 } else if (SOSO.isChecked() || RADneutral.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Neutral, Stress-Level: 25%");
-                    Analyse.setText(DONE);
                 } else if (Pre_Severe.isChecked() || RADneutral.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Neutral, Stress-Level: 50%");
-                    Analyse.setText(DONE);
                 } else if (Severe.isChecked() || RADneutral.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Neutral, Stress-Level: 100%");
-                    Analyse.setText(DONE);
                 } else if (OK.isChecked() || RADother.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Other, Stress-Level: 0%");
-                    Analyse.setText(DONE);
                 } else if (SOSO.isChecked() || RADother.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Other, Stress-Level: 25%");
-                    Analyse.setText(DONE);
                 } else if (Pre_Severe.isChecked() || RADother.isChecked()) {
+                    Analyse.setText(DONE);
                     E_MOTION.setText("Other, Stress-Level: 50%");
-                    Analyse.setText(DONE);
                 } else if (Severe.isChecked() || RADother.isChecked()) {
-                    E_MOTION.setText("Other, Stress-Level: 100%");
                     Analyse.setText(DONE);
+                    E_MOTION.setText("Other, Stress-Level: 100%");
                 } else {
                     Log.w(TAG, "FE" + " classification null");
                 }
@@ -342,6 +342,10 @@ public class MainActivity extends AppCompatActivity {
             CAMERA_VIEW.captureImage();
             GRAPHIC_OVERLAY.clear();
             return false;
+        }
+
+        if (id == R.id.Setting){
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
