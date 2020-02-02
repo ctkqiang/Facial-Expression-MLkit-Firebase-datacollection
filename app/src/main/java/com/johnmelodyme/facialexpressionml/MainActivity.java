@@ -57,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth FIREBASEAUTH;
     private CameraView CAMERA_VIEW;
     private GraphicOverlay GRAPHIC_OVERLAY;
-    private RadioButton RADhappy, RADsad, RADneutral, RADother;
+    private RadioButton OK, SOSO, Pre_Severe, Severe, RADhappy, RADsad, RADneutral, RADother;
     private RadioGroup RG_Emotion;
-    private Button OK, SOSO, Pre_Severe, Severe, Analyse;
+    private Button Analyse;
     TextView Emotion_result, ACCURACY, E_MOTION;
     private EditText COMMENT;
     Thread thread;
@@ -166,49 +166,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         Analyse.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                if (OK.isPressed() || RADhappy.isChecked()){
+                if (OK.isChecked()|| RADhappy.isChecked()){
                     E_MOTION.setText("Happy, Stress-Level: 0%");
-                } else if (SOSO.isPressed() || RADhappy.isChecked()){
+                } else if (SOSO.isChecked() || RADhappy.isChecked()){
                     E_MOTION.setText("Happy, Stress-Level: 25%");
-                } else if (Pre_Severe.isPressed() || RADhappy.isChecked()){
+                } else if (Pre_Severe.isChecked() || RADhappy.isChecked()){
                     E_MOTION.setText("Happy, Stress-Level: 50%");
-                } else if (Severe.isPressed() || RADhappy.isChecked()){
+                } else if (Severe.isChecked() || RADhappy.isChecked()){
                     E_MOTION.setText("Happy, Stress-Level: 100%");
-                } else if (OK.isPressed() || RADsad.isChecked()){
+                } else if (OK.isChecked() || RADsad.isChecked()){
                     E_MOTION.setText("Sad, Stress-Level: 0%");
-                } else if (SOSO.isPressed() || RADsad.isChecked()){
+                } else if (SOSO.isChecked() || RADsad.isChecked()){
                     E_MOTION.setText("Sad, Stress-Level: 25%");
-                } else if (Pre_Severe.isPressed() || RADsad.isChecked()){
+                } else if (Pre_Severe.isChecked() || RADsad.isChecked()){
                     E_MOTION.setText("Sad, Stress-Level: 50%");
-                } else if (Severe.isPressed() || RADsad.isChecked()){
+                } else if (Severe.isChecked() || RADsad.isChecked()){
                     E_MOTION.setText("Sad, Stress-Level: 100%");
-                } else if (OK.isPressed() || RADneutral.isChecked()){
+                } else if (OK.isChecked() || RADneutral.isChecked()){
                     E_MOTION.setText("Neutral, Stress-Level: 0%");
-                } else if (SOSO.isPressed() || RADneutral.isChecked()){
+                } else if (SOSO.isChecked() || RADneutral.isChecked()){
                     E_MOTION.setText("Neutral, Stress-Level: 25%");
-                } else if (Pre_Severe.isPressed() || RADneutral.isChecked()){
+                } else if (Pre_Severe.isChecked() || RADneutral.isChecked()){
                     E_MOTION.setText("Neutral, Stress-Level: 50%");
-                } else if (Severe.isPressed() || RADneutral.isChecked()){
+                } else if (Severe.isChecked() || RADneutral.isChecked()){
                     E_MOTION.setText("Neutral, Stress-Level: 100%");
-                } else if (OK.isPressed() || RADother.isChecked()){
+                } else if (OK.isChecked() || RADother.isChecked()){
                     E_MOTION.setText("Other, Stress-Level: 0%");
-                } else if (SOSO.isPressed() || RADother.isChecked()){
+                } else if (SOSO.isChecked() || RADother.isChecked()){
                     E_MOTION.setText("Other, Stress-Level: 25%");
-                } else if (Pre_Severe.isPressed() || RADother.isChecked()){
+                } else if (Pre_Severe.isChecked() || RADother.isChecked()){
                     E_MOTION.setText("Other, Stress-Level: 50%");
-                } else if (Severe.isPressed() || RADother.isChecked()){
+                } else if (Severe.isChecked() || RADother.isChecked()){
                     E_MOTION.setText("Other, Stress-Level: 100%");
                 } else {
-                    System.out.println("Null");
+                    Log.w(TAG, "FE" + " classification null");
                 }
             }
         });
-
     }
 
     private void PROCESS_FACE_DETECTION(Bitmap bitmap) {
