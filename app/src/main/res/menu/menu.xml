@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/SwitchCamera"
+        android:icon="@drawable/ic_switch_camera_black_24dp"
+        android:title="@string/switchtf"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/Setting"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/setting"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:title="@string/about_dev"
+        app:showAsAction="collapseActionView"/>
+
     <item
         android:id="@+id/signout"
         android:icon="@drawable/signout"

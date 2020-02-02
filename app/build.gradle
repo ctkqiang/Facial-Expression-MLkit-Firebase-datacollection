@@ -40,10 +40,13 @@ dependencies {
     implementation 'com.wonderkiln:camerakit:0.13.1'
     // Dialogue:
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    implementation 'com.github.f0ris.sweetalert:library:1.6.2'
     //implementation 'com.flyco.dialog:FlycoDialog_Lib:1.2.2@aar'
     //implementation 'com.flyco.animation:FlycoAnimation_Lib:1.0.0@aar'
     //implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
     // gif :
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
+    // Personal API:
+    //implementation 'com.github.johnmelodyme:Facial-Expression-MLkit-Firebase-datacollection:-SNAPSHOT'
 }

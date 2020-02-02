@@ -4,7 +4,6 @@ package com.johnmelodyme.facialexpressionml;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -13,11 +12,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +30,7 @@ import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetector;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetectorOptions;
 import com.johnmelodyme.facialexpressionml.Helper.GraphicOverlay;
 import com.johnmelodyme.facialexpressionml.Helper.RectOverlay;
+import com.wonderkiln.camerakit.CameraKit;
 import com.wonderkiln.camerakit.CameraKitError;
 import com.wonderkiln.camerakit.CameraKitEvent;
 import com.wonderkiln.camerakit.CameraKitEventListener;
@@ -39,7 +41,6 @@ import java.util.List;
 import java.util.Random;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
-
 /**
  * @Author : John Melody Melissa
  * @Copyright: John Melody Melissa  © Copyright 2020
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth FIREBASEAUTH;
     private CameraView CAMERA_VIEW;
     private GraphicOverlay GRAPHIC_OVERLAY;
+    private RadioButton RADhappy, RADsad, RADneutral, RADother;
     TextView Emotion_result, ACCURACY;
-    private CheckBox cb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,12 +99,15 @@ public class MainActivity extends AppCompatActivity {
           }
         };
         thread.start();
+        //thread.stop();
+
         ALERT_PROMPT = new SpotsDialog
                 .Builder()
                 .setContext(MainActivity.this)
                 .setMessage("Logging Out...")
                 .setCancelable(false)
                 .build();
+
         LOADING = new SpotsDialog
                 .Builder()
                 .setContext(MainActivity.this)
@@ -216,6 +220,26 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
              */
+            return true;
+        }
+
+        if (id == R.id.SwitchCamera){
+            if(CAMERA_VIEW.isFacingFront()){
+                CAMERA_VIEW.setFacing(CameraKit.Constants.FACING_BACK);
+                Log.w(TAG, "FE" + "onclick():<> Camera is now facing the BACK ==> {ok} " );
+            } else {
+                CAMERA_VIEW.setFacing(CameraKit.Constants.FACING_FRONT);
+                Log.w(TAG, "FE" + "onclick():<>  Camera is now facing the Front ==> {ok} " );
+            }
+            return true;
+        }
+
+        if (id == R.id.about){
+            new SweetAlertDialog(MainActivity.this)
+                    .setTitleText("Version 1.0.0")
+                    .setContentText("Developed by John Melody Melissa")
+                    .show();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
