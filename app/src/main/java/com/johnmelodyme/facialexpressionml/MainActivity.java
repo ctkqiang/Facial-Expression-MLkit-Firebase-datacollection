@@ -13,12 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,11 +40,13 @@ import java.util.List;
 import java.util.Random;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
+
 /**
  * @Author : John Melody Melissa
  * @Copyright: John Melody Melissa  © Copyright 2020
  * @INPIREDBYGF : Sin Dee <3
  */
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
     private android.app.AlertDialog ALERT_PROMPT, LOADING;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private CameraView CAMERA_VIEW;
     private GraphicOverlay GRAPHIC_OVERLAY;
     private RadioButton RADhappy, RADsad, RADneutral, RADother;
+    private RadioGroup RG_Emotion;
     TextView Emotion_result, ACCURACY;
 
     @Override
@@ -65,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         CAMERA_VIEW = findViewById(R.id.CAMERA);
         GRAPHIC_OVERLAY = findViewById(R.id.GO);
         ACCURACY = findViewById(R.id.cal);
+        RADhappy = findViewById(R.id.Happy);
+        RADneutral = findViewById(R.id.Neutral);
+        RADsad = findViewById(R.id.Sad);
+        RADother = findViewById(R.id.Other);
+        RG_Emotion = findViewById(R.id.RADIO_GROUP_EMOTION);
 
         Thread thread = new Thread(){
           @Override
@@ -148,8 +155,8 @@ public class MainActivity extends AppCompatActivity {
                 GRAPHIC_OVERLAY.clear();
             }
         });
-    }
 
+    }
 
     private void PROCESS_FACE_DETECTION(Bitmap bitmap) {
         FirebaseVisionImage firebaseVisionImage;
