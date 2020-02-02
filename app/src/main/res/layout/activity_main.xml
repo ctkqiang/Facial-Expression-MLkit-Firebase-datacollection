@@ -211,6 +211,7 @@
             android:layout_marginBottom="3dp"
             android:background="@null"
             android:ems="10"
+            android:hint="@string/comment"
             android:importantForAutofill="no"
             android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
             android:maxLines="6"
@@ -233,7 +234,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Comment" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
