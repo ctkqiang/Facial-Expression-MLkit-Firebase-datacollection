@@ -157,57 +157,64 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/RADIO_GROUP_EMOTION" />
 
-        <RadioButton
-            android:id="@+id/soso"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:background="@mipmap/soso"
-            app:layout_constraintEnd_toStartOf="@+id/presevere"
-            app:layout_constraintStart_toEndOf="@+id/ok"
-            app:layout_constraintTop_toBottomOf="@+id/StressLevel" />
-
-        <RadioButton
-            android:id="@+id/severe"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="56dp"
-            android:background="@mipmap/severe"
+        <RadioGroup
+            android:id="@+id/buttonEMO"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/presevere"
-            app:layout_constraintTop_toBottomOf="@+id/StressLevel" />
-
-        <RadioButton
-            android:id="@+id/ok"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="55dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="33dp"
-            android:background="@mipmap/ok"
-            app:layout_constraintEnd_toStartOf="@+id/soso"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StressLevel" />
+            app:layout_constraintTop_toBottomOf="@+id/StressLevel">
 
-        <RadioButton
-            android:id="@+id/presevere"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="5dp"
-            android:background="@mipmap/presevere"
-            app:layout_constraintEnd_toStartOf="@+id/severe"
-            app:layout_constraintStart_toEndOf="@+id/soso"
-            app:layout_constraintTop_toBottomOf="@+id/StressLevel" />
+            <RadioButton
+                android:id="@+id/ok"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:background="@mipmap/ok"
+                android:button="@android:color/transparent"
+                app:layout_constraintEnd_toStartOf="@+id/soso"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="181dp" />
+
+            <RadioButton
+                android:id="@+id/soso"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="40dp"
+                android:background="@mipmap/soso"
+                android:button="@android:color/transparent"
+                app:layout_constraintEnd_toStartOf="@+id/presevere"
+                app:layout_constraintStart_toEndOf="@+id/ok"
+                tools:layout_editor_absoluteY="181dp" />
+
+            <RadioButton
+                android:id="@+id/presevere"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:background="@mipmap/presevere"
+                android:button="@android:color/transparent"
+                app:layout_constraintEnd_toStartOf="@+id/severe"
+                app:layout_constraintStart_toEndOf="@+id/soso"
+                tools:layout_editor_absoluteY="181dp" />
+
+            <RadioButton
+                android:id="@+id/severe"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="38dp"
+                android:background="@mipmap/severe"
+                android:button="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/presevere"
+                tools:layout_editor_absoluteY="181dp" />
+        </RadioGroup>
 
         <EditText
             android:id="@+id/Comment"
-            android:layout_width="match_parent"
+            android:layout_width="408dp"
             android:layout_height="0dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="3dp"
             android:background="@null"
             android:ems="10"
             android:hint="@string/comment"
@@ -217,10 +224,8 @@
             android:minLines="3"
             app:layout_constraintBottom_toTopOf="@+id/analyse"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StressLevel"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <Button
             android:id="@+id/analyse"
@@ -251,6 +256,28 @@
             app:layout_constraintEnd_toStartOf="@+id/e_motion"
             app:layout_constraintStart_toEndOf="@+id/RADIO_GROUP_EMOTION"
             app:layout_constraintTop_toBottomOf="@+id/question1" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/eeeee"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonEMO" />
+
+        <TextView
+            android:id="@+id/emoji"
+            android:layout_width="258dp"
+            android:layout_height="98dp"
+            android:lineSpacingExtra="10sp"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/RADIO_GROUP_EMOTION"
+            app:layout_constraintTop_toBottomOf="@+id/e_motion" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@ package com.johnmelodyme.facialexpressionml;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton OK, SOSO, Pre_Severe, Severe, RADhappy, RADsad, RADneutral, RADother;
     private RadioGroup RG_Emotion;
     private Button Analyse;
-    TextView Emotion_result, ACCURACY, E_MOTION;
+    TextView Emotion_result, ACCURACY, E_MOTION, EMOJI;
     private EditText COMMENT;
     Thread thread;
 
@@ -86,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         Severe = findViewById(R.id.severe);
         Analyse = findViewById(R.id.analyse);
         E_MOTION = findViewById(R.id.e_motion);
+        EMOJI = findViewById(R.id.emoji);
 
         thread = new Thread() {
             @Override
@@ -170,38 +170,61 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
+                String DONE, load;
+                DONE = v.getResources().getString(R.string.analyse_after_done);
+                load = v.getResources().getString(R.string.analyse_after);
+                CAMERA_VIEW.start();
+                CAMERA_VIEW.captureImage();
+                GRAPHIC_OVERLAY.clear();
+                Analyse.setText(load);
                 if (OK.isChecked()|| RADhappy.isChecked()){
                     E_MOTION.setText("Happy, Stress-Level: 0%");
+                    Analyse.setText(DONE);
                 } else if (SOSO.isChecked() || RADhappy.isChecked()){
                     E_MOTION.setText("Happy, Stress-Level: 25%");
+                    Analyse.setText(DONE);
                 } else if (Pre_Severe.isChecked() || RADhappy.isChecked()){
                     E_MOTION.setText("Happy, Stress-Level: 50%");
+                    Analyse.setText(DONE);
                 } else if (Severe.isChecked() || RADhappy.isChecked()){
                     E_MOTION.setText("Happy, Stress-Level: 100%");
+                    Analyse.setText(DONE);
                 } else if (OK.isChecked() || RADsad.isChecked()){
                     E_MOTION.setText("Sad, Stress-Level: 0%");
+                    Analyse.setText(DONE);
                 } else if (SOSO.isChecked() || RADsad.isChecked()){
                     E_MOTION.setText("Sad, Stress-Level: 25%");
+                    Analyse.setText(DONE);
                 } else if (Pre_Severe.isChecked() || RADsad.isChecked()){
                     E_MOTION.setText("Sad, Stress-Level: 50%");
+                    Analyse.setText(DONE);
                 } else if (Severe.isChecked() || RADsad.isChecked()){
                     E_MOTION.setText("Sad, Stress-Level: 100%");
+                    Analyse.setText(DONE);
                 } else if (OK.isChecked() || RADneutral.isChecked()){
                     E_MOTION.setText("Neutral, Stress-Level: 0%");
+                    Analyse.setText(DONE);
                 } else if (SOSO.isChecked() || RADneutral.isChecked()){
                     E_MOTION.setText("Neutral, Stress-Level: 25%");
+                    Analyse.setText(DONE);
                 } else if (Pre_Severe.isChecked() || RADneutral.isChecked()){
                     E_MOTION.setText("Neutral, Stress-Level: 50%");
+                    Analyse.setText(DONE);
                 } else if (Severe.isChecked() || RADneutral.isChecked()){
                     E_MOTION.setText("Neutral, Stress-Level: 100%");
+                    Analyse.setText(DONE);
                 } else if (OK.isChecked() || RADother.isChecked()){
                     E_MOTION.setText("Other, Stress-Level: 0%");
+                    Analyse.setText(DONE);
                 } else if (SOSO.isChecked() || RADother.isChecked()){
                     E_MOTION.setText("Other, Stress-Level: 25%");
+                    Analyse.setText(DONE);
                 } else if (Pre_Severe.isChecked() || RADother.isChecked()){
                     E_MOTION.setText("Other, Stress-Level: 50%");
+                    Analyse.setText(DONE);
                 } else if (Severe.isChecked() || RADother.isChecked()){
                     E_MOTION.setText("Other, Stress-Level: 100%");
+                    Analyse.setText(DONE);
                 } else {
                     Log.w(TAG, "FE" + " classification null");
                 }

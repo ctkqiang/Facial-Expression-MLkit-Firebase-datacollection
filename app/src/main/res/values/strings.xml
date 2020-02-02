@@ -2,7 +2,6 @@
     <string name="app_name">Facial Expression ML</string>
     <string name="email_h">Enter Email</string>
     <string name="password_h">Enter Password</string>
-
     <string name="register">Register</string>
     <string name="login">Login</string>
     <string name="existinguser_login">Already have an Account? Login Here.</string>
@@ -10,7 +9,6 @@
     <string name="pls">Please Enter Your Email for Reset your password</string>
     <string name="rpass">Reset Password</string>
     <string name="res">Reset</string>
-    <!-- item -->
     <string name="signout">Log Out</string>
     <string name="freeze">Freeze Camera</string>
     <string name="about">About Developer</string>
@@ -38,4 +36,5 @@
     <string name="dk">I am so clueless </string>
     <string name="other">Other 😕</string>
     <string name="ee">Emotion: </string>
+    <string name="eeeee">Stress-free,   So-So,  Headache,   Severe-Stress</string>
 </resources>
