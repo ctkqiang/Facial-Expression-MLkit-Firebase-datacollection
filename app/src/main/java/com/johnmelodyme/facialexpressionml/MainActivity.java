@@ -4,6 +4,7 @@ package com.johnmelodyme.facialexpressionml;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -16,8 +17,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,8 +39,10 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
+
 import java.util.List;
 import java.util.Random;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -73,37 +78,37 @@ public class MainActivity extends AppCompatActivity {
         RADother = findViewById(R.id.Other);
         RG_Emotion = findViewById(R.id.RADIO_GROUP_EMOTION);
 
-        Thread thread = new Thread(){
-          @Override
-          public void run(){
-              try{
-                  while(!isInterrupted()){
-                      Thread.sleep(1000);
-                      runOnUiThread(new Runnable() {
-                          @Override
-                          public void run() {
-                              // TODO CONVERT INT TO STRING
-                              Random random = new Random();
-                              //int RandomData = R.nextInt(EMOTIONS.length);
-                              double classification;
-                              String Data[];
-                              int D, COUNT;
-                              final String E, S;
-                              COUNT = 0;
-                              Data = getResources().getStringArray(R.array.emo);
-                              D = new Random().nextInt(Data.length);
-                              E = Data[D];
-                              classification = random.nextDouble();
-                              S = String.valueOf(classification);
-                              ACCURACY.setText(S);
-                              Emotion_result.setText(E);
-                          }
-                      });
-                  }
-              } catch (InterruptedException e) {
-                  Emotion_result.setText("");
-              }
-          }
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // TODO CONVERT INT TO STRING
+                                Random random = new Random();
+                                //int RandomData = R.nextInt(EMOTIONS.length);
+                                double classification;
+                                String Data[];
+                                int D, COUNT;
+                                final String E, S;
+                                COUNT = 0;
+                                Data = getResources().getStringArray(R.array.emo);
+                                D = new Random().nextInt(Data.length);
+                                E = Data[D];
+                                classification = random.nextDouble();
+                                S = String.valueOf(classification);
+                                ACCURACY.setText(S);
+                                Emotion_result.setText(E);
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                    Emotion_result.setText("");
+                }
+            }
         };
         thread.start();
         //thread.stop();
@@ -178,15 +183,15 @@ public class MainActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                ROTIBAKAR("Error: " +  exception.getMessage());
-                Log.w(TAG,"Firebase Face Detector" + ":" + " Error: " +  exception.getMessage());
+                ROTIBAKAR("Error: " + exception.getMessage());
+                Log.w(TAG, "Firebase Face Detector" + ":" + " Error: " + exception.getMessage());
             }
         });
     }
 
     private void getFaceResult(List<FirebaseVisionFace> firebaseVisionFaces) {
         int COUNTER = 0x0;
-        for (FirebaseVisionFace visionFace : firebaseVisionFaces){
+        for (FirebaseVisionFace visionFace : firebaseVisionFaces) {
             Rect rect = visionFace.getBoundingBox();
             RectOverlay rectOverlay = new RectOverlay(GRAPHIC_OVERLAY, rect);
             GRAPHIC_OVERLAY.add(rectOverlay);
@@ -200,10 +205,11 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.signout){
+        if (id == R.id.signout) {
             ALERT_PROMPT.show();
             FirebaseAuth.AuthStateListener AUTH;
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -230,18 +236,18 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.SwitchCamera){
-            if(CAMERA_VIEW.isFacingFront()){
+        if (id == R.id.SwitchCamera) {
+            if (CAMERA_VIEW.isFacingFront()) {
                 CAMERA_VIEW.setFacing(CameraKit.Constants.FACING_BACK);
-                Log.w(TAG, "FE" + "onclick():<> Camera is now facing the BACK ==> {ok} " );
+                Log.w(TAG, "FE" + "onclick():<> Camera is now facing the BACK ==> {ok} ");
             } else {
                 CAMERA_VIEW.setFacing(CameraKit.Constants.FACING_FRONT);
-                Log.w(TAG, "FE" + "onclick():<>  Camera is now facing the Front ==> {ok} " );
+                Log.w(TAG, "FE" + "onclick():<>  Camera is now facing the Front ==> {ok} ");
             }
             return true;
         }
 
-        if (id == R.id.about){
+        if (id == R.id.about) {
             new SweetAlertDialog(MainActivity.this)
                     .setTitleText("Version 1.0.0")
                     .setContentText("Developed by John Melody Melissa")
@@ -251,26 +257,26 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void ROTIBAKAR(String string){
+    public void ROTIBAKAR(String string) {
         Toast.makeText(MainActivity.this, string,
                 Toast.LENGTH_SHORT)
                 .show();
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         CAMERA_VIEW.stop();
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         CAMERA_VIEW.start();
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Sign Out? ")
