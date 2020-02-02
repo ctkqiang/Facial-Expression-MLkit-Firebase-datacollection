@@ -5,6 +5,7 @@ package com.johnmelodyme.facialexpressionml;
  *  SO I do So.
  */
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -14,14 +15,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,10 +40,8 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
-
 import java.util.List;
 import java.util.Random;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -62,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton RADhappy, RADsad, RADneutral, RADother;
     private RadioGroup RG_Emotion;
     private Button OK, SOSO, Pre_Severe, Severe, Analyse;
-    TextView Emotion_result, ACCURACY;
+    TextView Emotion_result, ACCURACY, E_MOTION;
+    private EditText COMMENT;
     Thread thread;
 
     @Override
@@ -80,11 +79,13 @@ public class MainActivity extends AppCompatActivity {
         RADsad = findViewById(R.id.Sad);
         RADother = findViewById(R.id.Other);
         RG_Emotion = findViewById(R.id.RADIO_GROUP_EMOTION);
+        COMMENT = findViewById(R.id.Comment);
         OK = findViewById(R.id.ok);
         SOSO = findViewById(R.id.soso);
         Pre_Severe = findViewById(R.id.presevere);
         Severe = findViewById(R.id.severe);
         Analyse = findViewById(R.id.analyse);
+        E_MOTION = findViewById(R.id.e_motion);
 
         thread = new Thread() {
             @Override
@@ -135,16 +136,13 @@ public class MainActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .build();
 
-
         CAMERA_VIEW.addCameraKitListener(new CameraKitEventListener() {
             @Override
             public void onEvent(CameraKitEvent cameraKitEvent) {
             }
-
             @Override
             public void onError(CameraKitError cameraKitError) {
             }
-
             @Override
             public void onImage(CameraKitImage cameraKitImage) {
                 LOADING.show();
@@ -153,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
                 CAMERA_VIEW.stop();
                 PROCESS_FACE_DETECTION(bitmap);
             }
-
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
             }
@@ -170,6 +167,47 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        Analyse.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                if (OK.isPressed() || RADhappy.isChecked()){
+                    E_MOTION.setText("Happy, Stress-Level: 0%");
+                } else if (SOSO.isPressed() || RADhappy.isChecked()){
+                    E_MOTION.setText("Happy, Stress-Level: 25%");
+                } else if (Pre_Severe.isPressed() || RADhappy.isChecked()){
+                    E_MOTION.setText("Happy, Stress-Level: 50%");
+                } else if (Severe.isPressed() || RADhappy.isChecked()){
+                    E_MOTION.setText("Happy, Stress-Level: 100%");
+                } else if (OK.isPressed() || RADsad.isChecked()){
+                    E_MOTION.setText("Sad, Stress-Level: 0%");
+                } else if (SOSO.isPressed() || RADsad.isChecked()){
+                    E_MOTION.setText("Sad, Stress-Level: 25%");
+                } else if (Pre_Severe.isPressed() || RADsad.isChecked()){
+                    E_MOTION.setText("Sad, Stress-Level: 50%");
+                } else if (Severe.isPressed() || RADsad.isChecked()){
+                    E_MOTION.setText("Sad, Stress-Level: 100%");
+                } else if (OK.isPressed() || RADneutral.isChecked()){
+                    E_MOTION.setText("Neutral, Stress-Level: 0%");
+                } else if (SOSO.isPressed() || RADneutral.isChecked()){
+                    E_MOTION.setText("Neutral, Stress-Level: 25%");
+                } else if (Pre_Severe.isPressed() || RADneutral.isChecked()){
+                    E_MOTION.setText("Neutral, Stress-Level: 50%");
+                } else if (Severe.isPressed() || RADneutral.isChecked()){
+                    E_MOTION.setText("Neutral, Stress-Level: 100%");
+                } else if (OK.isPressed() || RADother.isChecked()){
+                    E_MOTION.setText("Other, Stress-Level: 0%");
+                } else if (SOSO.isPressed() || RADother.isChecked()){
+                    E_MOTION.setText("Other, Stress-Level: 25%");
+                } else if (Pre_Severe.isPressed() || RADother.isChecked()){
+                    E_MOTION.setText("Other, Stress-Level: 50%");
+                } else if (Severe.isPressed() || RADother.isChecked()){
+                    E_MOTION.setText("Other, Stress-Level: 100%");
+                } else {
+                    System.out.println("Null");
+                }
+            }
+        });
 
     }
 

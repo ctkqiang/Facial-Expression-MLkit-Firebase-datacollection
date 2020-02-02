@@ -99,9 +99,8 @@
 
         <RadioGroup
             android:id="@+id/RADIO_GROUP_EMOTION"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="150dp"
+            android:layout_height="122dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/question1">
 
@@ -234,6 +233,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Comment" />
+
+        <TextView
+            android:id="@+id/e_motion"
+            android:layout_width="197dp"
+            android:layout_height="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/question1" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="61dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/ee"
+            tools:layout_editor_absoluteX="150dp"
+            tools:layout_editor_absoluteY="27dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
