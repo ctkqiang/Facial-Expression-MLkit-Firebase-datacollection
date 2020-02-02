@@ -17,10 +17,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,10 +37,8 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
-
 import java.util.List;
 import java.util.Random;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -61,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton RADhappy, RADsad, RADneutral, RADother;
     private RadioGroup RG_Emotion;
     TextView Emotion_result, ACCURACY;
+    Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         RADother = findViewById(R.id.Other);
         RG_Emotion = findViewById(R.id.RADIO_GROUP_EMOTION);
 
-        Thread thread = new Thread() {
+         thread = new Thread() {
             @Override
             public void run() {
                 try {
@@ -127,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .build();
 
+
         CAMERA_VIEW.addCameraKitListener(new CameraKitEventListener() {
             @Override
             public void onEvent(CameraKitEvent cameraKitEvent) {
@@ -138,11 +136,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onImage(CameraKitImage cameraKitImage) {
-                ALERT_PROMPT.show();
+                LOADING.show();
                 Bitmap bitmap = cameraKitImage.getBitmap();
                 bitmap = Bitmap.createScaledBitmap(bitmap, CAMERA_VIEW.getWidth(), CAMERA_VIEW.getHeight(), false);
                 CAMERA_VIEW.stop();
-
                 PROCESS_FACE_DETECTION(bitmap);
             }
 
@@ -254,6 +251,14 @@ public class MainActivity extends AppCompatActivity {
                     .show();
             return true;
         }
+
+        if (id == R.id.freeze){
+            CAMERA_VIEW.start();
+            CAMERA_VIEW.captureImage();
+            GRAPHIC_OVERLAY.clear();
+            return false;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -277,7 +282,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Sign Out? ")
                 .setConfirmText("Yes.")
@@ -285,8 +289,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
                         FIREBASEAUTH.signOut();
+                        System.exit(0);
                         sDialog.dismissWithAnimation();
-                        finish();
                     }
                 })
                 .setCancelButton("No.", new SweetAlertDialog.OnSweetClickListener() {
@@ -296,5 +300,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+
     }
 }

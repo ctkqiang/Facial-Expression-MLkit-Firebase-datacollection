@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/freeze"
+        android:icon="@drawable/freeze"
+        android:title="@string/freeze"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/SwitchCamera"
         android:icon="@drawable/ic_switch_camera_black_24dp"
         android:title="@string/switchtf"

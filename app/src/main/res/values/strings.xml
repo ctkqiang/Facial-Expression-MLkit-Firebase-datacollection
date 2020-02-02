@@ -12,6 +12,7 @@
     <string name="res">Reset</string>
     <!-- item -->
     <string name="signout">Log Out</string>
+    <string name="freeze">Freeze Camera</string>
     <string name="about">About Developer</string>
     <string name="frontcamera">Switch Front Camera</string>
     <string name="profile">Profile</string>
@@ -24,13 +25,18 @@
     <string name="n">null</string>
     <string name="n_n">0.000000</string>
     <string name="emo_what">Q1: How do you feel?</string>
+    <string name="stateyourstresslevel">Q2: Please State Your Stress Level:</string>
     <string name="setting">Setting</string>
     <string name="about_dev">About</string>
+    <string name="analyse">Click To Analyse 💁‍♀</string>
+    <string name="analyse_after">Analysing… 👨‍💻 </string>
+    <string name="analyse_after_done">Done 👍 </string>
+    <string name="comment">Comment 💬</string>
 
     <!-- EMOTION  -->
-    <string name="happy">Happy</string>
-    <string name="sad">Sad</string>
-    <string name="neutral">Neutral</string>
-    <string name="dk">I am so clueless</string>
-    <string name="other">Other</string>
+    <string name="happy">Happy 😁</string>
+    <string name="sad">Sad 😥</string>
+    <string name="neutral">Neutral 😐</string>
+    <string name="dk">I am so clueless </string>
+    <string name="other">Other 😕</string>
 </resources>
