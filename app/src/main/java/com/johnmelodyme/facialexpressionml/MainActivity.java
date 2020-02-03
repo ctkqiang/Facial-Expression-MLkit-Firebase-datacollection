@@ -4,7 +4,6 @@ package com.johnmelodyme.facialexpressionml;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private int D;
     private Handler handler;
     Random ran = new Random();
-    double d_classification;
+    float d_classification;
     int TIME = 0b0;
     private GraphView GRAPH;
     private LineGraphSeries<DataPoint> DATA;
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         EMOJI = findViewById(R.id.emoji);
         handler = new Handler();
         GRAPH = findViewById(R.id.graph);
-        d_classification = ran.nextDouble();
+        d_classification = ran.nextFloat();
         DATA = new LineGraphSeries<>();
         GRAPH.addSeries(DATA);
         Viewport viewport = GRAPH.getViewport();
@@ -113,11 +112,9 @@ public class MainActivity extends AppCompatActivity {
         viewport.setMinY(0);
         viewport.setMaxY(1);
         viewport.setScrollable(true);
-
         Data = getResources().getStringArray(R.array.emo);
         D = new Random().nextInt(Data.length);
         E = Data[D];
-
         thread = new Thread() {
             @Override
             public void run() {
@@ -282,10 +279,8 @@ public class MainActivity extends AppCompatActivity {
         firebaseVisionFaceDetectorOptions = new FirebaseVisionFaceDetectorOptions
                 .Builder()
                 .build();
-
         FirebaseVisionFaceDetector firebaseVisionFaceDetector = FirebaseVision.getInstance()
                 .getVisionFaceDetector(firebaseVisionFaceDetectorOptions);
-
         firebaseVisionFaceDetector.detectInImage(firebaseVisionImage)
                 .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionFace>>() {
                     @Override
@@ -409,7 +404,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                // we add 100 new entries
                 for (int i = 0; i < 100; i++) {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -417,11 +411,10 @@ public class MainActivity extends AppCompatActivity {
                             addEntry();
                         }
                     });
-                    // sleep to slow down the add of entries
                     try {
-                        Thread.sleep(600);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
-                        // manage error ...
+                        Log.w(TAG, "FE" + e);
                     }
                 }
             }
@@ -429,7 +422,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addEntry() {
-        DATA.appendData(new DataPoint(TIME++, d_classification++), true, 100);
+        DATA.appendData(new DataPoint(TIME++, ran.nextDouble()), true, 100);
     }
 
     @Override
@@ -450,8 +443,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(SweetAlertDialog sDialog) {
                         sDialog.dismissWithAnimation();
                     }
-                })
-                .show();
-
+                }).show();
     }
 }

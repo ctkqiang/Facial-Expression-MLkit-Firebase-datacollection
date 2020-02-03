@@ -231,6 +231,7 @@
             android:background="@null"
             android:ems="10"
             android:hint="@string/comment"
+            android:focusableInTouchMode="true"
             android:importantForAutofill="no"
             android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
             android:maxLines="6"
@@ -301,10 +302,12 @@
             android:layout_width="257dp"
             android:layout_height="87dp"
             android:layout_marginEnd="15dp"
+            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintBottom_toTopOf="@+id/StressLevel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/RADIO_GROUP_EMOTION"
-            app:layout_constraintTop_toBottomOf="@+id/emoji" />
+            app:layout_constraintTop_toBottomOf="@+id/emoji"
+            tools:ignore="UnusedAttribute" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
