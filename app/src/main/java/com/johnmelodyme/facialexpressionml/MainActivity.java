@@ -4,7 +4,6 @@ package com.johnmelodyme.facialexpressionml;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -352,6 +351,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.Setting){
+            Intent SETTING;
+            SETTING = new Intent(MainActivity.this, Preference.class);
+            startActivity(SETTING);
             return true;
         }
 

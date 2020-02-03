@@ -55,4 +55,9 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
     <string name="disp">Display</string>
+    <string name="disp_LP">Force Landscape / Portrait mode</string>
+    <string name="On">On</string>
+    <string name="Off">Off</string>
+    <string name="Other">Other</string>
+    <string name="report">Email To Developer</string>
 </resources>
