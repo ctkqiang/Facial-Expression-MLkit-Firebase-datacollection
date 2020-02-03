@@ -368,7 +368,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(SETTING);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
