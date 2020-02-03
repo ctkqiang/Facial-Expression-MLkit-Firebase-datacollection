@@ -6,4 +6,5 @@
     <color name="gradient">#000000</color>
     <color name="textinput">#FF0058</color>
     <color name="ripple">#FF518B</color>
+    <color name="ripple_e">#66FF0075</color>
 </resources>

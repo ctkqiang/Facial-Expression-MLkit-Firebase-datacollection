@@ -20,10 +20,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,10 +40,8 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
-
 import java.util.List;
 import java.util.Random;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -67,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
     TextView Emotion_result, ACCURACY, E_MOTION, EMOJI;
     private EditText COMMENT;
     Thread thread;
+    private String E;
+    private String Data[];
+    private int D;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
         E_MOTION = findViewById(R.id.e_motion);
         EMOJI = findViewById(R.id.emoji);
 
+        Data = getResources().getStringArray(R.array.emo);
+        D = new Random().nextInt(Data.length);
+        E = Data[D];
+
         thread = new Thread() {
             @Override
             public void run() {
@@ -116,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                                 S = String.valueOf(classification);
                                 ACCURACY.setText(S);
                                 Emotion_result.setText(E);
+                                //Log.w(TAG, "USER EMOTION : " + E);
                             }
                         });
                     }
@@ -192,55 +196,58 @@ public class MainActivity extends AppCompatActivity {
 //                } else {}
                 if (OK.isChecked() || RADhappy.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Happy, Stress-Level: 0%");
+                    E_MOTION.setText("Stress-Level: 0%");
                 } else if (SOSO.isChecked() || RADhappy.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Happy, Stress-Level: 25%");
+                    E_MOTION.setText("Stress-Level: 25%");
                 } else if (Pre_Severe.isChecked() || RADhappy.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Happy, Stress-Level: 50%");
+                    E_MOTION.setText("Stress-Level: 50%");
                 } else if (Severe.isChecked() || RADhappy.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Happy, Stress-Level: 100%");
+                    E_MOTION.setText("Stress-Level: 100%");
                 } else if (OK.isChecked() || RADsad.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Sad, Stress-Level: 0%");
+                    E_MOTION.setText("Stress-Level: 0%");
                 } else if (SOSO.isChecked() || RADsad.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Sad, Stress-Level: 25%");
+                    E_MOTION.setText("Stress-Level: 25%");
                 } else if (Pre_Severe.isChecked() || RADsad.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Sad, Stress-Level: 50%");
+                    E_MOTION.setText("Stress-Level: 50%");
                 } else if (Severe.isChecked() || RADsad.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Sad, Stress-Level: 100%");
+                    E_MOTION.setText("Stress-Level: 100%");
                 } else if (OK.isChecked() || RADneutral.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Neutral, Stress-Level: 0%");
+                    E_MOTION.setText("Stress-Level: 0%");
                 } else if (SOSO.isChecked() || RADneutral.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Neutral, Stress-Level: 25%");
+                    E_MOTION.setText("Stress-Level: 25%");
                 } else if (Pre_Severe.isChecked() || RADneutral.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Neutral, Stress-Level: 50%");
+                    E_MOTION.setText("Stress-Level: 50%");
                 } else if (Severe.isChecked() || RADneutral.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Neutral, Stress-Level: 100%");
+                    E_MOTION.setText("Stress-Level: 100%");
                 } else if (OK.isChecked() || RADother.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Other, Stress-Level: 0%");
+                    E_MOTION.setText("Stress-Level: 0%");
                 } else if (SOSO.isChecked() || RADother.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Other, Stress-Level: 25%");
+                    E_MOTION.setText("Stress-Level: 25%");
                 } else if (Pre_Severe.isChecked() || RADother.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Other, Stress-Level: 50%");
+                    E_MOTION.setText("Stress-Level: 50%");
                 } else if (Severe.isChecked() || RADother.isChecked()) {
                     Analyse.setText(DONE);
-                    E_MOTION.setText("Other, Stress-Level: 100%");
+                    E_MOTION.setText("Stress-Level: 100%");
                 } else {
                     Log.w(TAG, "FE" + " classification null");
                 }
+
+                EMOJI.setText("User is :  " + "\"" + E + "\"") ;
+                thread.interrupt();
             }
         });
     }

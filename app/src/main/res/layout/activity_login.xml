@@ -17,6 +17,7 @@
         android:fontFamily="@font/amita"
         android:text="@string/forgotpass"
         android:textAlignment="center"
+        android:foreground="?android:attr/selectableItemBackground"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,10 +79,12 @@
         android:fontFamily="@font/amita"
         android:text="@string/login"
         android:textColor="@android:color/white"
+        android:foreground="?android:attr/selectableItemBackground"
         android:imeOptions="actionDone"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/forgotpass_loginscreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_login" />
+        app:layout_constraintTop_toBottomOf="@+id/password_login"
+        tools:ignore="TextViewEdits,UnusedAttribute" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="221dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -60,6 +61,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
             android:layout_toStartOf="@+id/cal"
+            android:visibility="invisible"
             android:layout_toEndOf="@+id/textView3"
             android:foregroundGravity="top|right|fill"
             android:gravity="right"
@@ -99,8 +101,8 @@
 
         <RadioGroup
             android:id="@+id/RADIO_GROUP_EMOTION"
-            android:layout_width="137dp"
-            android:layout_height="120dp"
+            android:layout_width="120dp"
+            android:layout_height="126dp"
             android:layout_marginStart="16dp"
             app:layout_constraintEnd_toStartOf="@+id/emoji"
             app:layout_constraintStart_toStartOf="parent"
@@ -164,9 +166,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StressLevel">
+            app:layout_constraintTop_toBottomOf="@+id/StressLevel"
+            tools:ignore="UnusedAttribute">
 
             <RadioButton
                 android:id="@+id/ok"
@@ -174,6 +178,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="30dp"
                 android:background="@mipmap/ok"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:button="@android:color/transparent"
                 app:layout_constraintEnd_toStartOf="@+id/soso"
                 app:layout_constraintStart_toStartOf="parent"
@@ -185,6 +190,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="40dp"
                 android:background="@mipmap/soso"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:button="@android:color/transparent"
                 app:layout_constraintEnd_toStartOf="@+id/presevere"
                 app:layout_constraintStart_toEndOf="@+id/ok"
@@ -196,6 +202,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="50dp"
                 android:background="@mipmap/presevere"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:button="@android:color/transparent"
                 app:layout_constraintEnd_toStartOf="@+id/severe"
                 app:layout_constraintStart_toEndOf="@+id/soso"
@@ -205,6 +212,7 @@
                 android:id="@+id/severe"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginStart="38dp"
                 android:background="@mipmap/severe"
                 android:button="@android:color/transparent"
@@ -215,8 +223,8 @@
 
         <EditText
             android:id="@+id/Comment"
-            android:layout_width="368dp"
-            android:layout_height="67dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="2dp"
@@ -278,12 +286,14 @@
 
         <TextView
             android:id="@+id/emoji"
-            android:layout_width="258dp"
-            android:layout_height="98dp"
+            android:layout_width="256dp"
+            android:layout_height="101dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="9dp"
             android:lineSpacingExtra="10sp"
             android:textAlignment="center"
             android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/StressLevel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/RADIO_GROUP_EMOTION"
             app:layout_constraintTop_toBottomOf="@+id/e_motion" />
