@@ -10,7 +10,7 @@
     <string name="rpass">Reset Password</string>
     <string name="res">Reset</string>
     <string name="signout">Log Out</string>
-    <string name="freeze">Freeze Camera</string>
+    <string name="freeze">Unfreeze/Freeze Camera</string>
     <string name="about">About Developer</string>
     <string name="frontcamera">Switch Front Camera</string>
     <string name="profile">Profile</string>
@@ -55,7 +55,7 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
     <string name="disp">Display</string>
-    <string name="disp_LP">Force Landscape / Portrait mode</string>
+    <string name="disp_LP">Force Landscape/Portrait mode</string>
     <string name="On">On</string>
     <string name="Off">Off</string>
     <string name="Other">Other</string>

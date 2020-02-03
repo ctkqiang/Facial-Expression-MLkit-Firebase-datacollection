@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private String E;
     private String Data[];
     private int D;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         Analyse = findViewById(R.id.analyse);
         E_MOTION = findViewById(R.id.e_motion);
         EMOJI = findViewById(R.id.emoji);
+        handler = new Handler();
 
         Data = getResources().getStringArray(R.array.emo);
         D = new Random().nextInt(Data.length);
@@ -181,18 +184,18 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                String DONE, load;
+                final String DONE, load;
                 DONE = v.getResources().getString(R.string.analyse_after_done);
                 load = v.getResources().getString(R.string.analyse_after);
                 CAMERA_VIEW.start();
                 CAMERA_VIEW.captureImage();
                 GRAPHIC_OVERLAY.clear();
                 Analyse.setText(load);
-//                if (!OK.isChecked() || !SOSO.isChecked() || !Pre_Severe.isChecked() || !Severe.isChecked()){
+//              if (!OK.isChecked() || !SOSO.isChecked() || !Pre_Severe.isChecked() || !Severe.isChecked()){
 //                    ROTIBAKAR("Please Select Your Emotion");
-//                } else if (!RADhappy.isChecked() || !RADsad.isChecked() || !RADneutral.isChecked() || !RADother.isChecked()){
+//              } else if (!RADhappy.isChecked() || !RADsad.isChecked() || !RADneutral.isChecked() || !RADother.isChecked()){
 //                    ROTIBAKAR("Please Select Your Stress Level");
-//                } else {}
+//              } else {}
                 if (OK.isChecked() || RADhappy.isChecked()) {
                     Analyse.setText(DONE);
                     E_MOTION.setText("Stress-Level: 0%");
@@ -244,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.w(TAG, "FE" + " classification null");
                 }
-
+                Log.w(TAG,"FE"+ " User is :  "  + E);
                 EMOJI.setText("User is :  " + "\"" + E + "\"") ;
                 thread.interrupt();
             }
@@ -272,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 ROTIBAKAR("Error: " + exception.getMessage());
-                Log.w(TAG, "Firebase Face Detector" + ":" + " Error: " + exception.getMessage());
+                Log.w(TAG, "FE" + ":" + " Error: " + exception.getMessage());
             }
         });
     }
