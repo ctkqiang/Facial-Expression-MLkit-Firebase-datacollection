@@ -4,6 +4,7 @@ package com.johnmelodyme.facialexpressionml;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,8 +22,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,8 +49,10 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
+
 import java.util.List;
 import java.util.Random;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -75,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler;
     Random ran = new Random();
     float d_classification;
-    int TIME = 0b0;
+    int TIME = 0x5;
     private GraphView GRAPH;
     private LineGraphSeries<DataPoint> DATA;
 
@@ -109,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
         GRAPH.addSeries(DATA);
         Viewport viewport = GRAPH.getViewport();
         viewport.setYAxisBoundsManual(true);
-        viewport.setMinY(0);
-        viewport.setMaxY(1);
+        viewport.setMinY(0x0);
+        viewport.setMaxY(0x1);
         viewport.setScrollable(true);
         Data = getResources().getStringArray(R.array.emo);
         D = new Random().nextInt(Data.length);
@@ -120,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     while (!isInterrupted()) {
-                        Thread.sleep(1000);
+                        Thread.sleep(0x3e8);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -131,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                                 String Data[];
                                 int D, COUNT;
                                 final String E, S;
-                                COUNT = 0;
+                                COUNT = 0x0;
                                 Data = getResources().getStringArray(R.array.emo);
                                 D = new Random().nextInt(Data.length);
                                 E = Data[D];
@@ -169,11 +174,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onEvent(CameraKitEvent cameraKitEvent) {
             }
-
             @Override
             public void onError(CameraKitError cameraKitError) {
             }
-
             @Override
             public void onImage(CameraKitImage cameraKitImage) {
                 LOADING.show();
@@ -182,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
                 CAMERA_VIEW.stop();
                 PROCESS_FACE_DETECTION(bitmap);
             }
-
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
             }
@@ -265,8 +267,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.w(TAG, "FE" + " classification null");
                 }
-                Log.w(TAG,"FE"+ " User is :  "  + E);
-                EMOJI.setText("User is :  " + "\"" + E + "\"") ;
+                Log.w(TAG, "FE" + " User is :  " + E);
+                EMOJI.setText("User is :  " + "\"" + E + "\"");
                 thread.interrupt();
             }
         });
@@ -295,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
                         .Builder(MainActivity.this)
                         .text("Error: " + exception.getMessage())
                         .textColor(Color.WHITE)
-                        .backgroundColor(Color.rgb(255,20,147))
+                        .backgroundColor(Color.rgb(0xff, 0x14, 0x93))
                         .show();
                 Log.w(TAG, "FE" + ":" + " Error: " + exception.getMessage());
             }
@@ -375,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
-        if (id == R.id.Setting){
+        if (id == R.id.Setting) {
             Intent SETTING;
             SETTING = new Intent(MainActivity.this, Preference.class);
             startActivity(SETTING);
@@ -401,10 +403,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         CAMERA_VIEW.start();
         new Thread(new Runnable() {
-
             @Override
             public void run() {
-                for (int i = 0; i < 100; i++) {
+                for (int i = 0x0; i < 0x3e8; i++) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -412,7 +413,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(0x64);
                     } catch (InterruptedException e) {
                         Log.w(TAG, "FE" + e);
                     }
@@ -422,7 +423,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addEntry() {
-        DATA.appendData(new DataPoint(TIME++, ran.nextDouble()), true, 100);
+        DATA.appendData(new DataPoint(TIME++, ran.nextDouble()), false
+                , 0x64);
     }
 
     @Override
@@ -434,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
                         FIREBASEAUTH.signOut();
-                        System.exit(0);
+                        System.exit(0x0);
                         sDialog.dismissWithAnimation();
                     }
                 })
