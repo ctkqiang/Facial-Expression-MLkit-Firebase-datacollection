@@ -4,9 +4,11 @@ package com.johnmelodyme.facialexpressionml;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +35,7 @@ import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetector;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetectorOptions;
 import com.johnmelodyme.facialexpressionml.Helper.GraphicOverlay;
 import com.johnmelodyme.facialexpressionml.Helper.RectOverlay;
+import com.muddzdev.styleabletoast.StyleableToast;
 import com.wonderkiln.camerakit.CameraKit;
 import com.wonderkiln.camerakit.CameraKitError;
 import com.wonderkiln.camerakit.CameraKitEvent;
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton OK, SOSO, Pre_Severe, Severe, RADhappy, RADsad, RADneutral, RADother;
     private RadioGroup RG_Emotion;
     private Button Analyse;
-    TextView Emotion_result, ACCURACY, E_MOTION, EMOJI;
+    private TextView Emotion_result, ACCURACY, E_MOTION, EMOJI;
     private EditText COMMENT;
     Thread thread;
     private String E;
@@ -274,7 +277,13 @@ public class MainActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                ROTIBAKAR("Error: " + exception.getMessage());
+                //ROTIBAKAR("Error: " + exception.getMessage());
+                new StyleableToast
+                        .Builder(MainActivity.this)
+                        .text("Error: " + exception.getMessage())
+                        .textColor(Color.WHITE)
+                        .backgroundColor(Color.rgb(255,20,147))
+                        .show();
                 Log.w(TAG, "FE" + ":" + " Error: " + exception.getMessage());
             }
         });

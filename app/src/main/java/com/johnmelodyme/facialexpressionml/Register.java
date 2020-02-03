@@ -2,6 +2,7 @@ package com.johnmelodyme.facialexpressionml;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import dmax.dialog.SpotsDialog;
 
@@ -99,10 +101,22 @@ public class Register extends AppCompatActivity {
                                 Intent TOMAIN;
                                 TOMAIN = new Intent(Register.this, MainActivity.class);
                                 startActivity(TOMAIN);
-                                ROTIBAKAR(String.valueOf(FIREBASEAUTH.getCurrentUser()));
+                                //ROTIBAKAR(String.valueOf(FIREBASEAUTH.getCurrentUser()));
+                                new StyleableToast
+                                        .Builder(Register.this)
+                                        .text(String.valueOf(FIREBASEAUTH.getCurrentUser()))
+                                        .textColor(Color.WHITE)
+                                        .backgroundColor(Color.rgb(255,20,147))
+                                        .show();
                                 Log.w(TAG, "FE" + "onComplete: FIREBASE REGISTRATION =======> {ok} ");
                             } else {
-                                ROTIBAKAR("Registration Failed :( ");
+                                //ROTIBAKAR("Registration Failed :( ");
+                                new StyleableToast
+                                        .Builder(Register.this)
+                                        .text("Registration Failed :( ")
+                                        .textColor(Color.WHITE)
+                                        .backgroundColor(Color.rgb(255,20,147))
+                                        .show();
                                 Log.w(TAG, "FE" + "onComplete: FIREBASE REGISTRATION =======> {failed} ");
                                 // TODO : GUEST VERSION;
                             }

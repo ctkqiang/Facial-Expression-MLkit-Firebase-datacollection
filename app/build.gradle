@@ -52,4 +52,6 @@ dependencies {
     //implementation 'com.github.johnmelodyme:Facial-Expression-MLkit-Firebase-datacollection:1.0.0'
     //Seek Bar:
     implementation 'com.xw.repo:bubbleseekbar:3.20'
+    //ANIMATION TOAST:
+    implementation 'com.muddzdev:styleabletoast:2.2.3'
 }

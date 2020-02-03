@@ -2,6 +2,7 @@ package com.johnmelodyme.facialexpressionml;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -19,6 +20,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.muddzdev.styleabletoast.StyleableToast;
+
 import dmax.dialog.SpotsDialog;
 
 /**
@@ -79,7 +82,13 @@ public class Login extends AppCompatActivity {
                     if (Password.length() < 6){
                         PASSWORD.setError(err_pass_strong);
                         if (Password.equals("admin")){
-                            ROTIBAKAR("GOOD TRY ON THE HACKING, YOU FAILED :) ");
+                            //ROTIBAKAR("GOOD TRY ON THE HACKING, YOU FAILED :) ");
+                            new StyleableToast
+                                    .Builder(Login.this)
+                                    .text("GOOD TRY ON THE HACKING, YOU FAILED :) ")
+                                    .textColor(Color.WHITE)
+                                    .backgroundColor(Color.rgb(255,20,147))
+                                    .show();
                         }
                     }
                 } else {
@@ -89,12 +98,24 @@ public class Login extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 ALERT_LOGIN.show();
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                ROTIBAKAR("Welcome back " + user);
+                                //ROTIBAKAR("Welcome back " + user);
+                                new StyleableToast
+                                        .Builder(Login.this)
+                                        .text("Welcome back " + user)
+                                        .textColor(Color.WHITE)
+                                        .backgroundColor(Color.rgb(255,20,147))
+                                        .show();
                                 Intent toMain;
                                 toMain = new Intent(Login.this, MainActivity.class);
                                 startActivity(toMain);
                             } else {
-                                ROTIBAKAR("Problem Login :(");
+                                //ROTIBAKAR("Problem Login :(");
+                                new StyleableToast
+                                        .Builder(Login.this)
+                                        .text("Problem Login :(")
+                                        .textColor(Color.WHITE)
+                                        .backgroundColor(Color.rgb(255,20,147))
+                                        .show();
                             }
                         }
                     });
@@ -137,9 +158,21 @@ public class Login extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         ALERT_RESET.show();
-                                        ROTIBAKAR("Password Reset Email Sent To " + Reset_Email);
+                                        //ROTIBAKAR("Password Reset Email Sent To " + Reset_Email);
+                                        new StyleableToast
+                                                .Builder(Login.this)
+                                                .text("Password Reset Email Sent To " + Reset_Email)
+                                                .textColor(Color.WHITE)
+                                                .backgroundColor(Color.rgb(255,20,147))
+                                                .show();
                                     } else {
-                                        ROTIBAKAR("FAILED");
+                                        //ROTIBAKAR("FAILED");
+                                        new StyleableToast
+                                                .Builder(Login.this)
+                                                .text("Failed :( ")
+                                                .textColor(Color.WHITE)
+                                                .backgroundColor(Color.rgb(255,20,147))
+                                                .show();
                                     }
                                 }
                             });

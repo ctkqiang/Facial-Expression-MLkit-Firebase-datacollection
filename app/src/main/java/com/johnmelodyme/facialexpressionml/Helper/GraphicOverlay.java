@@ -16,6 +16,7 @@ package com.johnmelodyme.facialexpressionml.Helper;
  * limitations under the License.
  */
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
@@ -101,6 +102,7 @@ public class GraphicOverlay extends View {
     /**
      * Draws the overlay with its associated graphic objects.
      */
+    @SuppressLint("CanvasSize")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
