@@ -33,6 +33,10 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetector;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetectorOptions;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.Viewport;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import com.johnmelodyme.facialexpressionml.Helper.GraphicOverlay;
 import com.johnmelodyme.facialexpressionml.Helper.RectOverlay;
 import com.muddzdev.styleabletoast.StyleableToast;
@@ -65,11 +69,16 @@ public class MainActivity extends AppCompatActivity {
     private Button Analyse;
     private TextView Emotion_result, ACCURACY, E_MOTION, EMOJI;
     private EditText COMMENT;
-    Thread thread;
+    Thread thread, g;
     private String E;
     private String Data[];
     private int D;
     private Handler handler;
+    Random ran = new Random();
+    double d_classification;
+    int TIME = 0b0;
+    private GraphView GRAPH;
+    private LineGraphSeries<DataPoint> DATA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +104,15 @@ public class MainActivity extends AppCompatActivity {
         E_MOTION = findViewById(R.id.e_motion);
         EMOJI = findViewById(R.id.emoji);
         handler = new Handler();
+        GRAPH = findViewById(R.id.graph);
+        d_classification = ran.nextDouble();
+        DATA = new LineGraphSeries<>();
+        GRAPH.addSeries(DATA);
+        Viewport viewport = GRAPH.getViewport();
+        viewport.setYAxisBoundsManual(true);
+        viewport.setMinY(0);
+        viewport.setMaxY(1);
+        viewport.setScrollable(true);
 
         Data = getResources().getStringArray(R.array.emo);
         D = new Random().nextInt(Data.length);
@@ -387,6 +405,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         CAMERA_VIEW.start();
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                // we add 100 new entries
+                for (int i = 0; i < 100; i++) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            addEntry();
+                        }
+                    });
+                    // sleep to slow down the add of entries
+                    try {
+                        Thread.sleep(600);
+                    } catch (InterruptedException e) {
+                        // manage error ...
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private void addEntry() {
+        DATA.appendData(new DataPoint(TIME++, d_classification++), true, 100);
     }
 
     @Override

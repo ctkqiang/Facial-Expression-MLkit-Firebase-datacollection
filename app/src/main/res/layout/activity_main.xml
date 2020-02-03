@@ -286,17 +286,25 @@
 
         <TextView
             android:id="@+id/emoji"
-            android:layout_width="256dp"
-            android:layout_height="101dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="9dp"
-            android:lineSpacingExtra="10sp"
-            android:textAlignment="center"
+            android:layout_width="257dp"
+            android:layout_height="22dp"
+            android:layout_marginEnd="15dp"
+            android:lineSpacingExtra="8sp"
+            android:textAlignment="viewStart"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toTopOf="@+id/StressLevel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/RADIO_GROUP_EMOTION"
             app:layout_constraintTop_toBottomOf="@+id/e_motion" />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="257dp"
+            android:layout_height="87dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/StressLevel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/RADIO_GROUP_EMOTION"
+            app:layout_constraintTop_toBottomOf="@+id/emoji" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
