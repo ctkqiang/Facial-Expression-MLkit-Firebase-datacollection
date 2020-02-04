@@ -17,14 +17,6 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-     implementation 'com.github.johnmelodyme:Facial-Expression-MLkit-Firebase-datacollection:1.0.0'
+     implementation 'com.github.johnmelodyme:Facial-Expression-MLkit-Firebase-datacollection:1.0.1'
 }
-```
-
-or 
-
-```
-dependencies {
-	implementation 'com.github.johnmelodyme:Facial-Expression-MLkit-Firebase-datacollection:Tag'
-	}
 ```
