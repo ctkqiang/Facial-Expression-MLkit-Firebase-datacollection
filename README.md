@@ -20,3 +20,11 @@ dependencies {
      implementation 'com.github.johnmelodyme:Facial-Expression-MLkit-Firebase-datacollection:1.0.0'
 }
 ```
+
+or 
+
+```
+dependencies {
+	implementation 'com.github.johnmelodyme:Facial-Expression-MLkit-Firebase-datacollection:Tag'
+	}
+```
