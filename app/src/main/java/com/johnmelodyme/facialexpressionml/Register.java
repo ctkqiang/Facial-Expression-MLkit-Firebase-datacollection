@@ -20,7 +20,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.muddzdev.styleabletoast.StyleableToast;
-
 import dmax.dialog.SpotsDialog;
 
 /**
@@ -44,7 +43,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Log.w(TAG, "FE" + "onCreate: REGISTRATION");
+        Log.d(TAG, "FE" + "onCreate: REGISTRATION");
 
         EXISTING = findViewById(R.id.existing);
         REGISTER = findViewById(R.id.register);
@@ -108,7 +107,7 @@ public class Register extends AppCompatActivity {
                                         .textColor(Color.WHITE)
                                         .backgroundColor(Color.rgb(255,20,147))
                                         .show();
-                                Log.w(TAG, "FE" + "onComplete: FIREBASE REGISTRATION =======> {ok} ");
+                                Log.d(TAG, "FE" + "onComplete: FIREBASE REGISTRATION =======> {ok} ");
                             } else {
                                 //ROTIBAKAR("Registration Failed :( ");
                                 new StyleableToast
@@ -117,7 +116,7 @@ public class Register extends AppCompatActivity {
                                         .textColor(Color.WHITE)
                                         .backgroundColor(Color.rgb(255,20,147))
                                         .show();
-                                Log.w(TAG, "FE" + "onComplete: FIREBASE REGISTRATION =======> {failed} ");
+                                Log.d(TAG, "FE" + "onComplete: FIREBASE REGISTRATION =======> {failed} ");
                                 // TODO : GUEST VERSION;
                             }
                         }
@@ -149,7 +148,7 @@ public class Register extends AppCompatActivity {
                 PROMPT.setNegativeButton(Rem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogue, int ID) {
-                        Log.w(TAG, "FE " + "User Suddenly, magically remembered his/her password");
+                        Log.d(TAG, "FE " + "User Suddenly, magically remembered his/her password");
                     }
                 }).setPositiveButton(yes, new DialogInterface.OnClickListener() {
                     @Override

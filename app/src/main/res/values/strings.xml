@@ -19,6 +19,7 @@
     <string name="b">Please Enter Password</string>
     <string name="c">The Password Must Be More Than 6 Letters </string>
     <string name="switchtf">Switch Camera</string>
+    <string name="exit">Exit</string>
     <string name="emotion">Emotion Confidence: </string>
     <string name="n">null</string>
     <string name="n_n">0.0000000000</string>

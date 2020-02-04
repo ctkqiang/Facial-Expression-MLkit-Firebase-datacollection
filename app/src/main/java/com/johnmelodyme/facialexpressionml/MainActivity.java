@@ -10,8 +10,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,7 +53,12 @@ import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -64,6 +72,9 @@ import dmax.dialog.SpotsDialog;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
+    private static final String FILE_NAME = "FacialExpressionDetectionResult.txt";
+    private TextToSpeech TEXT_TO_SPEECH;
+    private MediaPlayer AI_SAY;
     private android.app.AlertDialog ALERT_PROMPT, LOADING;
     private FirebaseAuth FIREBASEAUTH;
     private CameraView CAMERA_VIEW;
@@ -88,7 +99,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.w(TAG, "FE" + "onCreate: Starting Application.");
+        Log.d(TAG, "FE" + "onCreate: Starting Application.");
+
+        TEXT_TO_SPEECH = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int STATUS) {
+                if (TextToSpeech.ERROR != STATUS) {
+                    TEXT_TO_SPEECH.setLanguage(Locale.UK);
+                }
+            }
+        });
+
         FIREBASEAUTH = FirebaseAuth.getInstance();
         Emotion_result = findViewById(R.id.emotion);
         CAMERA_VIEW = findViewById(R.id.CAMERA);
@@ -144,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                                 S = String.valueOf(classification);
                                 ACCURACY.setText(S);
                                 Emotion_result.setText(E);
-                                //Log.w(TAG, "USER EMOTION : " + E);
+                                //Log.d(TAG, "USER EMOTION : " + E);
                             }
                         });
                     }
@@ -204,7 +225,19 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
+                AI_SAY = MediaPlayer.create(MainActivity.this, R.raw.analyzing);
+                AI_SAY.start();
+                AI_SAY.stop();
                 final String DONE, load;
+                String USER_STRESS_VALUE, USER_EMOTION_PREDICTION;
+
+                USER_STRESS_VALUE = E_MOTION.getText()
+                        .toString()
+                        .trim();
+                USER_EMOTION_PREDICTION =EMOJI.getText()
+                        .toString()
+                        .trim();
+
                 DONE = v.getResources().getString(R.string.analyse_after_done);
                 load = v.getResources().getString(R.string.analyse_after);
                 CAMERA_VIEW.start();
@@ -265,13 +298,56 @@ public class MainActivity extends AppCompatActivity {
                     Analyse.setText(DONE);
                     E_MOTION.setText("Stress-Level: 100%");
                 } else {
-                    Log.w(TAG, "FE" + " classification null");
+                    Log.d(TAG, "FE" + " classification null");
                 }
-                Log.w(TAG, "FE" + " User is :  " + E);
+
+                if (isExternalStorageAvailable()){
+                    File textFile = new File(Environment.getExternalStorageDirectory(), FILE_NAME);
+                    try {
+                        FileOutputStream FILE_OUTPUT = new FileOutputStream(textFile);
+                        //FILE_OUTPUT = openFileOutput(FILE_NAME, MODE_APPEND);
+                        FILE_OUTPUT.write(USER_STRESS_VALUE.getBytes());
+
+                        new StyleableToast
+                                .Builder(MainActivity.this)
+                                .text("File saved to " + getFilesDir() +  "/" + FILE_NAME)
+                                .textColor(Color.WHITE)
+                                .backgroundColor(Color.rgb(255,20,147))
+                                .show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally{
+                        FileOutputStream FILE_OUTPUT = null;
+                        try {
+                            FILE_OUTPUT = new FileOutputStream(textFile);
+                            if (FILE_OUTPUT != null) {
+                                try {
+                                    FILE_OUTPUT.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+                Log.d(TAG, "FE" + " User is :  " + E);
                 EMOJI.setText("User is :  " + "\"" + E + "\"");
                 thread.interrupt();
             }
         });
+    }
+
+
+    private boolean isExternalStorageAvailable(){
+        if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())){
+            Log.d(TAG, "SDCARD WRITABLE======>");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void PROCESS_FACE_DETECTION(Bitmap bitmap) {
@@ -299,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
                         .textColor(Color.WHITE)
                         .backgroundColor(Color.rgb(0xff, 0x14, 0x93))
                         .show();
-                Log.w(TAG, "FE" + ":" + " Error: " + exception.getMessage());
+                Log.d(TAG, "FE" + ":" + " Error: " + exception.getMessage());
             }
         });
     }
@@ -354,10 +430,10 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.SwitchCamera) {
             if (CAMERA_VIEW.isFacingFront()) {
                 CAMERA_VIEW.setFacing(CameraKit.Constants.FACING_BACK);
-                Log.w(TAG, "FE" + "onclick():<> Camera is now facing the BACK ==> {ok} ");
+                Log.d(TAG, "FE" + "onclick():<> Camera is now facing the BACK ==> {ok} ");
             } else {
                 CAMERA_VIEW.setFacing(CameraKit.Constants.FACING_FRONT);
-                Log.w(TAG, "FE" + "onclick():<>  Camera is now facing the Front ==> {ok} ");
+                Log.d(TAG, "FE" + "onclick():<>  Camera is now facing the Front ==> {ok} ");
             }
             return true;
         }
@@ -415,7 +491,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         Thread.sleep(0x64);
                     } catch (InterruptedException e) {
-                        Log.w(TAG, "FE" + e);
+                        Log.d(TAG, "FE" + e);
                     }
                 }
             }
@@ -435,6 +511,7 @@ public class MainActivity extends AppCompatActivity {
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
+                        ALERT_PROMPT.show();
                         FIREBASEAUTH.signOut();
                         System.exit(0x0);
                         sDialog.dismissWithAnimation();
@@ -446,5 +523,6 @@ public class MainActivity extends AppCompatActivity {
                         sDialog.dismissWithAnimation();
                     }
                 }).show();
+
     }
 }
