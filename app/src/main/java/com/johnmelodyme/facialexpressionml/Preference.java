@@ -7,11 +7,13 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import dmax.dialog.SpotsDialog;
 
 /**
  * @Author : John Melody Melissa
@@ -23,6 +25,9 @@ public class Preference extends AppCompatActivity {
     private static final String TAG = Preference.class.getName();
     private Switch ON_OFF_SCREEN;
     private TextView EmailToDev;
+    private Button LOGOUT;
+    private android.app.AlertDialog ALERT_PROMPT;
+    private FirebaseAuth FIREBASEAUTH;
 
     public static void contactHelpAndSupport(Context context, String[] to, String subject) {
         String body = "";
@@ -46,9 +51,17 @@ public class Preference extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preference);
+        FIREBASEAUTH = FirebaseAuth.getInstance();
+        ALERT_PROMPT = new SpotsDialog
+                .Builder()
+                .setContext(Preference.this)
+                .setMessage("Logging Out...")
+                .setCancelable(false)
+                .build();
 
         ON_OFF_SCREEN = findViewById(R.id.orientation);
         EmailToDev = findViewById(R.id.emailus);
+        LOGOUT = findViewById(R.id.logout_per);
 
         ON_OFF_SCREEN.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -68,6 +81,16 @@ public class Preference extends AppCompatActivity {
                         new String[]{"Johnmelodyme@yandex.com",
                                 "Johnmelodyme@icloud.com"},
                         "App help & support");
+            }
+        });
+
+        LOGOUT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ALERT_PROMPT.show();
+                FIREBASEAUTH.signOut();
+                FirebaseAuth.getInstance().signOut();
+                System.exit(0x0);
             }
         });
     }
