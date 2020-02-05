@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,6 +47,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.johnmelodyme.facialexpressionml.Helper.GraphicOverlay;
 import com.johnmelodyme.facialexpressionml.Helper.RectOverlay;
 import com.muddzdev.styleabletoast.StyleableToast;
+import com.roger.catloadinglibrary.CatLoadingView;
 import com.wonderkiln.camerakit.CameraKit;
 import com.wonderkiln.camerakit.CameraKitError;
 import com.wonderkiln.camerakit.CameraKitEvent;
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
     int TIME = 0x5;
     private GraphView GRAPH;
     private LineGraphSeries<DataPoint> DATA;
+    private CatLoadingView loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +205,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onImage(CameraKitImage cameraKitImage) {
                 LOADING.show();
+//                KProgressHUD hud = KProgressHUD.create(MainActivity.this)
+//                        .setStyle(KProgressHUD.Style.ANNULAR_DETERMINATE)
+//                        .setLabel("Please wait")
+//                        .setMaxProgress(30)
+//                        .show();
+//                hud.show();
                 Bitmap bitmap = cameraKitImage.getBitmap();
                 bitmap = Bitmap.createScaledBitmap(bitmap, CAMERA_VIEW.getWidth(), CAMERA_VIEW.getHeight(), false);
                 CAMERA_VIEW.stop();
@@ -524,5 +534,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).show();
 
+    }
+    
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    @Override
+    public void onStart(){
+        super.onStart();
+        // TODO: firebase server;
     }
 }

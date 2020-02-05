@@ -46,12 +46,14 @@ dependencies {
     // Dialogue:
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+    implementation 'com.roger.catloadinglibrary:catloadinglibrary:1.0.4'
     //implementation 'com.flyco.dialog:FlycoDialog_Lib:1.2.2@aar'
     //implementation 'com.flyco.animation:FlycoAnimation_Lib:1.0.0@aar'
     //implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
     // gif :
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
+    implementation 'com.github.yash786agg:AnimatedLoadingIndicator:v1.3'
     // Personal API:
     //implementation 'com.github.johnmelodyme:Facial-Expression-MLkit-Firebase-datacollection:1.0.0'
     //Seek Bar:
@@ -60,9 +62,10 @@ dependencies {
     implementation 'com.muddzdev:styleabletoast:2.2.3'
     // Graph :
     implementation 'com.jjoe64:graphview:4.2.2'
+    implementation 'com.kaopiz:kprogresshud:1.0.2'
     // Add the Crashlytics NDK dependency
     implementation 'com.crashlytics.sdk.android:crashlytics-ndk:2.1.1'
-
+    implementation 'androidx.biometric:biometric:1.0.1'
 }
 
 //apply plugin: 'com.google.firebase.crashlytics'
