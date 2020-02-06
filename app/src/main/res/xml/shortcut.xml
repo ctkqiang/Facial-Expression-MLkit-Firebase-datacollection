@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- SETTINGS SHORTCUT -->
+    <shortcut
+        android:enabled="true"
+        android:shortcutId="start"
+        android:shortcutShortLabel="@string/shorcut_msg"
+        tools:targetApi="25">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.johnmelodyme.facialexpressionml.MainActivity"
+            android:targetPackage="com.johnmelodyme.facialexpressionml.MainActivity"/>
+    </shortcut>
+</shortcuts>

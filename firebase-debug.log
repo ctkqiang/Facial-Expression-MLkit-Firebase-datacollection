@@ -1,0 +1,38 @@
+[debug] [2020-02-06T03:53:36.171Z] ----------------------------------------------------------------------
+[debug] [2020-02-06T03:53:36.174Z] Command:       D:\node\node.exe C:\Users\johnm\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only firestore
+[debug] [2020-02-06T03:53:36.174Z] CLI Version:   7.11.0
+[debug] [2020-02-06T03:53:36.175Z] Platform:      win32
+[debug] [2020-02-06T03:53:36.175Z] Node Version:  v12.14.0
+[debug] [2020-02-06T03:53:36.176Z] Time:          Thu Feb 06 2020 11:53:36 GMT+0800 (Singapore Standard Time)
+[debug] [2020-02-06T03:53:36.177Z] ----------------------------------------------------------------------
+[debug] [2020-02-06T03:53:36.177Z] 
+[debug] [2020-02-06T03:53:36.189Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-06T03:53:36.190Z] > authorizing via signed-in user
+[warn] !  Could not find config (firebase.json) so using defaults.
+[info] i  emulators: Starting emulators: firestore
+[warn] !  No Firestore rules file specified in firebase.json, using default rules.
+[info] i  firestore: Serving ALL traffic (including WebChannel) on http://localhost:8080
+[warn] !  firestore: Support for WebChannel on a separate port (8081) is DEPRECATED and will go away soon. Please use port above instead.
+[debug] [2020-02-06T03:53:38.302Z] Ignoring unsupported arg: projectId
+[debug] [2020-02-06T03:53:38.302Z] Ignoring unsupported arg: auto_download
+[debug] [2020-02-06T03:53:38.302Z] Starting emulator firestore with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\johnm\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.10.2.jar","--host","localhost","--port",8080,"--webchannel_port",8081],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator"],"joinArgs":false}
+[info] i  firestore: Emulator logging to firestore-debug.log
+[debug] [2020-02-06T03:53:44.619Z] API endpoint: http://
+[debug] [2020-02-06T03:53:44.620Z] localhost:8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=
+[debug] [2020-02-06T03:53:44.620Z] localhost:8080
+
+Dev App Server is now running.
+
+
+[info] +  firestore: Emulator started at http://localhost:8080
+[info] i  firestore: For testing set FIRESTORE_EMULATOR_HOST=localhost:8080
+[info] +  All emulators started, it is now safe to connect.
+[debug] [2020-02-06T04:00:09.749Z] Feb 06, 2020 12:00:09 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+
+[debug] [2020-02-06T04:33:52.127Z] Feb 06, 2020 12:33:52 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+

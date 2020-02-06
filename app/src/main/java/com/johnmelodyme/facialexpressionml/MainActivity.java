@@ -465,6 +465,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(SETTING);
             return true;
         }
+
+        if (id == R.id.export){
+            Intent export;
+            export = new Intent(MainActivity.this, Data_list.class);
+            startActivity(export);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

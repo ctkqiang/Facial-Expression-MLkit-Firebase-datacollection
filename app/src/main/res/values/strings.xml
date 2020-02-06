@@ -30,6 +30,7 @@
     <string name="analyse">Click To Analyse 💁‍♀</string>
     <string name="analyse_after">Analysing… 👨‍💻 </string>
     <string name="analyse_after_done">Done 👍 </string>
+    <string name="Share">Export To Database</string>
     <string name="comment">Comment 💬</string>
     <string name="happy">Happy 😁</string>
     <string name="sad">Sad 😥</string>
@@ -39,6 +40,7 @@
     <string name="ee">Emotion: </string>
     <string name="eeeee">Stress-free,   So-So,  Headache,   Severe-Stress</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="shorcut_msg">Start</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
