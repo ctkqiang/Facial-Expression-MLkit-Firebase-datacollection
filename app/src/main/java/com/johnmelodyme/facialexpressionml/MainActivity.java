@@ -27,11 +27,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,11 +57,9 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
-
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -323,6 +319,22 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "FE" + " User is :  " + E);
                 EMOJI.setText("User is :  " + "\"" + E + "\"");
                 thread.interrupt();
+            }
+        });
+
+
+        // TODO: setOnLongClickListener : ANALYSE:
+        Analyse.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String click;
+                click = getResources().getString(R.string.analyse);
+                E_MOTION.setText(" ");
+                Analyse.setText(click);
+                thread.start();
+                GRAPHIC_OVERLAY.clear();
+                CAMERA_VIEW.stop();
+                return false;
             }
         });
     }
