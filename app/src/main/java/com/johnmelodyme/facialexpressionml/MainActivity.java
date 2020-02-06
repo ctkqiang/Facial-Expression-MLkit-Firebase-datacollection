@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -26,9 +27,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +41,9 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetector;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetectorOptions;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
@@ -53,13 +59,11 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -72,9 +76,11 @@ import dmax.dialog.SpotsDialog;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
     private static final String FILE_NAME = "FacialExpressionDetectionResult.txt";
+    private static final int CAMERA_REQUEST_CODE = 0x1;
+    private StorageReference CLOUD_STORAGE;
     private TextToSpeech TEXT_TO_SPEECH;
     private MediaPlayer AI_SAY;
-    private android.app.AlertDialog ALERT_PROMPT, LOADING;
+    private android.app.AlertDialog ALERT_PROMPT, LOADING, UPLOADING;
     private FirebaseAuth FIREBASEAUTH;
     private CameraView CAMERA_VIEW;
     private GraphicOverlay GRAPHIC_OVERLAY;
@@ -110,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        CLOUD_STORAGE = FirebaseStorage.getInstance().getReference();
         FIREBASEAUTH = FirebaseAuth.getInstance();
         Emotion_result = findViewById(R.id.emotion);
         CAMERA_VIEW = findViewById(R.id.CAMERA);
@@ -181,6 +188,13 @@ public class MainActivity extends AppCompatActivity {
                 .Builder()
                 .setContext(MainActivity.this)
                 .setMessage("Logging Out...")
+                .setCancelable(false)
+                .build();
+
+        UPLOADING = new SpotsDialog
+                .Builder()
+                .setContext(MainActivity.this)
+                .setMessage("Uploading to the server...")
                 .setCancelable(false)
                 .build();
 
@@ -306,45 +320,49 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.d(TAG, "FE" + " classification null");
                 }
-
-                if (isExternalStorageAvailable()){
-                    File textFile = new File(Environment.getExternalStorageDirectory(), FILE_NAME);
-                    try {
-                        FileOutputStream FILE_OUTPUT = new FileOutputStream(textFile);
-                        //FILE_OUTPUT = openFileOutput(FILE_NAME, MODE_APPEND);
-                        FILE_OUTPUT.write(USER_STRESS_VALUE.getBytes());
-
-                        new StyleableToast
-                                .Builder(MainActivity.this)
-                                .text("File saved to " + getFilesDir() +  "/" + FILE_NAME)
-                                .textColor(Color.WHITE)
-                                .backgroundColor(Color.rgb(255,20,147))
-                                .show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally{
-                        FileOutputStream FILE_OUTPUT = null;
-                        try {
-                            FILE_OUTPUT = new FileOutputStream(textFile);
-                            if (FILE_OUTPUT != null) {
-                                try {
-                                    FILE_OUTPUT.close();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }
                 Log.d(TAG, "FE" + " User is :  " + E);
                 EMOJI.setText("User is :  " + "\"" + E + "\"");
                 thread.interrupt();
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestcode, int resultcode, Intent data) {
+        super.onActivityResult(requestcode, resultcode, data);
+
+        if (requestcode == CAMERA_REQUEST_CODE && resultcode == RESULT_OK){
+
+            UPLOADING.show();
+            Uri uri = data.getData();
+            StorageReference filepath = CLOUD_STORAGE.child("FACES").child(uri.getLastPathSegment());
+            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    UPLOADING.dismiss();
+                    new StyleableToast
+                            .Builder(MainActivity.this)
+                            .text("Exported to the database...{ok}")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.rgb(255,20,147))
+                            .show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    UPLOADING.dismiss();
+                    new StyleableToast
+                            .Builder(MainActivity.this)
+                            .text("404: Server Error :( ")
+                            .textColor(Color.WHITE)
+                            .backgroundColor(Color.rgb(255,20,147))
+                            .show();
+                }
+            });
+        }
+    }
+
+
 
 
     private boolean isExternalStorageAvailable(){
