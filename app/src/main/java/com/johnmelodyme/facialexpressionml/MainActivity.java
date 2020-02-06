@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
                 thread.start();
                 GRAPHIC_OVERLAY.clear();
                 CAMERA_VIEW.stop();
-                return false;
+                return true;
             }
         });
     }
