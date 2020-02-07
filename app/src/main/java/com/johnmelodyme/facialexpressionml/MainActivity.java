@@ -29,9 +29,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,10 +68,12 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -124,6 +128,27 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        ALERT_PROMPT = new SpotsDialog
+                .Builder()
+                .setContext(MainActivity.this)
+                .setMessage("Logging Out...")
+                .setCancelable(false)
+                .build();
+
+        UPLOADING = new SpotsDialog
+                .Builder()
+                .setContext(MainActivity.this)
+                .setMessage("Uploading to the server...")
+                .setCancelable(false)
+                .build();
+
+        LOADING = new SpotsDialog
+                .Builder()
+                .setContext(MainActivity.this)
+                .setMessage("Loading...")
+                .setCancelable(false)
+                .build();
+
 
         CLOUD_STORAGE = FirebaseStorage.getInstance().getReference();
         FIREBASEAUTH = FirebaseAuth.getInstance();
@@ -193,26 +218,6 @@ public class MainActivity extends AppCompatActivity {
         thread.start();
         //thread.stop();
 
-        ALERT_PROMPT = new SpotsDialog
-                .Builder()
-                .setContext(MainActivity.this)
-                .setMessage("Logging Out...")
-                .setCancelable(false)
-                .build();
-
-        UPLOADING = new SpotsDialog
-                .Builder()
-                .setContext(MainActivity.this)
-                .setMessage("Uploading to the server...")
-                .setCancelable(false)
-                .build();
-
-        LOADING = new SpotsDialog
-                .Builder()
-                .setContext(MainActivity.this)
-                .setMessage("Loading...")
-                .setCancelable(false)
-                .build();
 
         CAMERA_VIEW.addCameraKitListener(new CameraKitEventListener() {
             @Override
