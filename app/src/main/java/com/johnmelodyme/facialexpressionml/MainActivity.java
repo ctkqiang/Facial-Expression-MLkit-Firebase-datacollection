@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     private Bitmap bitmap;
     Thread thread, g;
     private String E;
-    private String Data[];
+    private String[] Data;
     private int D;
     private Handler handler;
     Random ran = new Random();
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                                 Random random = new Random();
                                 //int RandomData = R.nextInt(EMOTIONS.length);
                                 double classification;
-                                String Data[];
+                                String[] Data;
                                 int D, COUNT;
                                 final String E, S;
                                 COUNT = 0x0;
@@ -401,6 +401,7 @@ public class MainActivity extends AppCompatActivity {
                                     .show();
                         } else {
                             // NOTHING
+                            System.out.println("_________________________");
                         }
                     }
 
