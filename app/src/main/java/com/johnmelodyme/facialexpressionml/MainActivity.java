@@ -68,8 +68,8 @@ import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Random;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -80,7 +80,7 @@ import dmax.dialog.SpotsDialog;
  */
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getName();
+    private static final String TAG = "MainActivity";
     private static final String FILE_NAME = "FacialExpressionDetectionResult.txt";
     private AppCompatActivity activity = MainActivity.this;
     private static final int CAMERA_REQUEST_CODE = 0x1;
@@ -113,13 +113,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "FE" + "onCreate: Starting Application.");
+        Log.d(TAG, "onCreate: Starting Application.");
 
         TEXT_TO_SPEECH = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int STATUS) {
                 if (TextToSpeech.ERROR != STATUS) {
                     TEXT_TO_SPEECH.setLanguage(Locale.UK);
+                    Log.d(TAG, "onInit: TTS__STARTED");
                 }
             }
         });
@@ -181,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
                                 S = String.valueOf(classification);
                                 ACCURACY.setText(S);
                                 Emotion_result.setText(E);
-                                //Log.d(TAG, "USER EMOTION : " + E);
                             }
                         });
                     }
@@ -234,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
                 bitmap = Bitmap.createScaledBitmap(bitmap, CAMERA_VIEW.getWidth(), CAMERA_VIEW.getHeight(), false);
                 CAMERA_VIEW.stop();
                 PROCESS_FACE_DETECTION(bitmap);
+                Log.d(TAG, "onImage: CAMERAVIEW is Running");
             }
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
@@ -254,9 +255,8 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                AI_SAY = MediaPlayer.create(MainActivity.this, R.raw.analyzing);
-                AI_SAY.start();
-                AI_SAY.stop();
+                AI_SAY();
+
                 final String DONE, load;
                 String USER_STRESS_VALUE, USER_EMOTION_PREDICTION;
 
@@ -329,10 +329,10 @@ public class MainActivity extends AppCompatActivity {
                     Analyse.setText(DONE);
                     E_MOTION.setText("Stress-Level: 100%");
                 } else {
-                    Log.d(TAG, "FE" + " classification null");
+                    Log.d(TAG, " classification :: null");
                 }
 
-                Log.d(TAG, "FE" + " User is :  " + E);
+                Log.d(TAG,  " User is :  " + E);
                 EMOJI.setText("User is :  " + "\"" + E + "\"");
                 thread.interrupt();
                 // TODO EXTERN:
@@ -355,8 +355,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void AI_SAY() {
+        AI_SAY = MediaPlayer.create(MainActivity.this, R.raw.analyzing);
+        AI_SAY.start();
+        AI_SAY.start();
+        AI_SAY.stop();
+        Log.d(TAG, "AI_SAY: ====> ");
+    }
+
     private void SAVE_TO_SD() {
         /*
+         * TODO SAVE_IMG_TO_PATH
          * Requesting storage permission
          * Once the permission granted, screen shot captured
          * On permanent denial show toast
@@ -379,6 +388,7 @@ public class MainActivity extends AppCompatActivity {
                                     .textColor(Color.WHITE)
                                     .backgroundColor(Color.rgb(255,20,147))
                                     .show();
+                            Log.d(TAG, "onPermissionGranted: " + POS_MSG + "\t" + PATH_TO_STORAGE);
                         } else {
                             new StyleableToast
                                     .Builder(MainActivity.this)
@@ -386,6 +396,7 @@ public class MainActivity extends AppCompatActivity {
                                     .textColor(Color.WHITE)
                                     .backgroundColor(Color.rgb(255,20,147))
                                     .show();
+                            Log.d(TAG, "onPermissionGranted: " + NEG_MSG);
                         }
                     }
 
@@ -400,8 +411,7 @@ public class MainActivity extends AppCompatActivity {
                                     .backgroundColor(Color.rgb(255,20,147))
                                     .show();
                         } else {
-                            // NOTHING
-                            System.out.println("_________________________");
+                            Log.d(TAG, "onPermissionDenied: {-1}");
                         }
                     }
 
@@ -413,10 +423,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // TODO SAVE_TOSD IMAGE:
+    // TODO SAVE_TOIMAGE:
     private void CAPTURE_DATA_SAVE() {
         bitmap = ScreenGrab.getInstance().takeScreenshotForView(CAMERA_VIEW);
         //bitmap = ScreenGrab.getInstance().takeScreenshotForScreen(activity);
+        Log.d(TAG, "CAPTURE_DATA_SAVE:  IMAGE CAPTURED");
     }
 
     @Override
@@ -426,7 +437,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestcode == CAMERA_REQUEST_CODE && resultcode == RESULT_OK){
             UPLOADING.show();
             Uri uri = data.getData();
-            StorageReference filepath = CLOUD_STORAGE.child("FACES").child(uri.getLastPathSegment());
+            assert uri != null;
+            StorageReference filepath = CLOUD_STORAGE.child("FACES").child(Objects.requireNonNull(uri.getLastPathSegment()));
             filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -455,7 +467,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isExternalStorageAvailable(){
         if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())){
-            Log.d(TAG, "SDCARD WRITABLE======>");
+            Log.w(TAG, "SDCARD WRITABLE======>");
             return true;
         } else {
             return false;
