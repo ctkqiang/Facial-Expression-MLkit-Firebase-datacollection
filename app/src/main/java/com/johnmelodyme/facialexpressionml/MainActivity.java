@@ -372,8 +372,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (bitmap != null) {
                             String PATH_TO_STORAGE;
-                            PATH_TO_STORAGE = Environment.getExternalStorageDirectory()
-                                    .toString() + "user_data.png";
+                            PATH_TO_STORAGE = Environment.getExternalStorageDirectory().toString() + "/user_data.png";
                             FileUtil.getInstance().storeBitmap(bitmap, PATH_TO_STORAGE);
                             new StyleableToast
                                     .Builder(MainActivity.this)
