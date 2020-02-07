@@ -29,11 +29,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -376,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
                         if (bitmap != null) {
                             String PATH_TO_STORAGE;
                             PATH_TO_STORAGE = Environment.getExternalStorageDirectory()
-                                    .toString() + "/user_data.png";
+                                    .toString() + "user_data.png";
                             FileUtil.getInstance().storeBitmap(bitmap, PATH_TO_STORAGE);
                             new StyleableToast
                                     .Builder(MainActivity.this)
@@ -420,9 +418,8 @@ public class MainActivity extends AppCompatActivity {
     // TODO SAVE_TOSD IMAGE:
     private void CAPTURE_DATA_SAVE() {
         bitmap = ScreenGrab.getInstance()
-                .takeScreenshotForView(parentView);
+                .takeScreenshotForView(CAMERA_VIEW);
     }
-
 
     @Override
     protected void onActivityResult(int requestcode, int resultcode, Intent data) {
