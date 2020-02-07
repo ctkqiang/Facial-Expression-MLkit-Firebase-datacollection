@@ -29,11 +29,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -68,7 +66,6 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
-
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -455,9 +452,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
-
-
 
     private boolean isExternalStorageAvailable(){
         if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())){
