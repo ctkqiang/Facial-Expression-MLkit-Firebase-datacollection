@@ -66,11 +66,9 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
-
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -83,6 +81,7 @@ import dmax.dialog.SpotsDialog;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
     private static final String FILE_NAME = "FacialExpressionDetectionResult.txt";
+    private AppCompatActivity activity = MainActivity.this;
     private static final int CAMERA_REQUEST_CODE = 0x1;
     private StorageReference CLOUD_STORAGE;
     private TextToSpeech TEXT_TO_SPEECH;
@@ -417,8 +416,8 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO SAVE_TOSD IMAGE:
     private void CAPTURE_DATA_SAVE() {
-        bitmap = ScreenGrab.getInstance()
-                .takeScreenshotForView(CAMERA_VIEW);
+        //bitmap = ScreenGrab.getInstance().takeScreenshotForView();
+        bitmap = ScreenGrab.getInstance().takeScreenshotForScreen(activity);
     }
 
     @Override
