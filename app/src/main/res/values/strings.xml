@@ -63,4 +63,8 @@
     <string name="Off">Off</string>
     <string name="Other">Other</string>
     <string name="report">Email To Developer</string>
+
+    <string name="save_img">Data Successfully Saved to </string>
+    <string name="save_img_failed">Data Failed To Save. </string>
+    <string name="sdx_grant_storage">Go to Permissions to Grant Storage</string>
 </resources>

@@ -36,6 +36,7 @@
                 android:layout_gravity="center"
                 android:foregroundGravity="center"
                 android:src="@mipmap/load" />
+
         </com.wonderkiln.camerakit.CameraView>
     </FrameLayout>
 

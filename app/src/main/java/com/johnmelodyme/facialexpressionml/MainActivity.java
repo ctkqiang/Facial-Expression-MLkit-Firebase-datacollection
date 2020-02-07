@@ -5,6 +5,7 @@ package com.johnmelodyme.facialexpressionml;
  *  SO I do So.
  */
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,13 +24,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,8 +52,15 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.johnmelodyme.facialexpressionml.Helper.GraphicOverlay;
 import com.johnmelodyme.facialexpressionml.Helper.RectOverlay;
+import com.johnmelodyme.facialexpressionml.Tools.FileUtil;
+import com.johnmelodyme.facialexpressionml.Tools.ScreenGrab;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.muddzdev.styleabletoast.StyleableToast;
-import com.roger.catloadinglibrary.CatLoadingView;
 import com.wonderkiln.camerakit.CameraKit;
 import com.wonderkiln.camerakit.CameraKitError;
 import com.wonderkiln.camerakit.CameraKitEvent;
@@ -57,9 +68,11 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -83,8 +96,10 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton OK, SOSO, Pre_Severe, Severe, RADhappy, RADsad, RADneutral, RADother;
     private RadioGroup RG_Emotion;
     private Button Analyse;
+    private FrameLayout parentView;
     private TextView Emotion_result, ACCURACY, E_MOTION, EMOJI;
     private EditText COMMENT;
+    private Bitmap bitmap;
     Thread thread, g;
     private String E;
     private String Data[];
@@ -95,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
     int TIME = 0x5;
     private GraphView GRAPH;
     private LineGraphSeries<DataPoint> DATA;
-    private CatLoadingView loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         E_MOTION = findViewById(R.id.e_motion);
         EMOJI = findViewById(R.id.emoji);
         handler = new Handler();
+        parentView = findViewById(R.id.frameLayout);
         GRAPH = findViewById(R.id.graph);
         d_classification = ran.nextFloat();
         DATA = new LineGraphSeries<>();
@@ -316,9 +331,14 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.d(TAG, "FE" + " classification null");
                 }
+                // TODO SAVE_TOSD:
+                CAPTURE_DATA_SAVE();
                 Log.d(TAG, "FE" + " User is :  " + E);
                 EMOJI.setText("User is :  " + "\"" + E + "\"");
                 thread.interrupt();
+
+                // TODO EXTERN:
+                SAVE_TO_SD();
             }
         });
 
@@ -338,6 +358,71 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void SAVE_TO_SD() {
+        /*
+         * Requesting storage permission
+         * Once the permission granted, screen shot captured
+         * On permanent denial show toast
+         */
+        Dexter.withActivity(MainActivity.this).withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        String POS_MSG, NEG_MSG;
+                        POS_MSG = getResources().getString(R.string.save_img);
+                        NEG_MSG = getResources().getString(R.string.save_img_failed);
+
+                        if (bitmap != null) {
+                            String PATH_TO_STORAGE;
+                            PATH_TO_STORAGE = Environment.getExternalStorageDirectory()
+                                    .toString() + "/user_data.png";
+                            FileUtil.getInstance().storeBitmap(bitmap, PATH_TO_STORAGE);
+                            new StyleableToast
+                                    .Builder(MainActivity.this)
+                                    .text(POS_MSG + "\t" + PATH_TO_STORAGE)
+                                    .textColor(Color.WHITE)
+                                    .backgroundColor(Color.rgb(255,20,147))
+                                    .show();
+                        } else {
+                            new StyleableToast
+                                    .Builder(MainActivity.this)
+                                    .text(NEG_MSG)
+                                    .textColor(Color.WHITE)
+                                    .backgroundColor(Color.rgb(255,20,147))
+                                    .show();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse USER_RESPONSE) {
+                        //Check for permanent denial of permission
+                        if (USER_RESPONSE.isPermanentlyDenied()){
+                            new StyleableToast
+                                    .Builder(MainActivity.this)
+                                    .text(getString(R.string.sdx_grant_storage))
+                                    .textColor(Color.WHITE)
+                                    .backgroundColor(Color.rgb(255,20,147))
+                                    .show();
+                        } else {
+                            // NOTHING
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+    }
+
+
+    // TODO SAVE_TOSD IMAGE:
+    private void CAPTURE_DATA_SAVE() {
+        bitmap = ScreenGrab.getInstance()
+                .takeScreenshotForView(parentView);
+    }
+
 
     @Override
     protected void onActivityResult(int requestcode, int resultcode, Intent data) {
@@ -574,6 +659,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
+        CAMERA_VIEW.start();
         // TODO: firebase server;
     }
 }
