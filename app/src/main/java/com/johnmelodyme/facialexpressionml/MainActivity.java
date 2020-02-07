@@ -340,7 +340,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         // TODO: setOnLongClickListener : ANALYSE:
         Analyse.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
