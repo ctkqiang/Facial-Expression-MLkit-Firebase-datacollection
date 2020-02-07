@@ -29,9 +29,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,9 +68,11 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -268,6 +272,8 @@ public class MainActivity extends AppCompatActivity {
 
                 DONE = v.getResources().getString(R.string.analyse_after_done);
                 load = v.getResources().getString(R.string.analyse_after);
+                // TODO SAVE_TOSD:
+                CAPTURE_DATA_SAVE();
                 CAMERA_VIEW.start();
                 CAMERA_VIEW.captureImage();
                 GRAPHIC_OVERLAY.clear();
@@ -328,12 +334,10 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.d(TAG, "FE" + " classification null");
                 }
-                // TODO SAVE_TOSD:
-                CAPTURE_DATA_SAVE();
+
                 Log.d(TAG, "FE" + " User is :  " + E);
                 EMOJI.setText("User is :  " + "\"" + E + "\"");
                 thread.interrupt();
-
                 // TODO EXTERN:
                 SAVE_TO_SD();
             }
@@ -348,7 +352,6 @@ public class MainActivity extends AppCompatActivity {
                 click = getResources().getString(R.string.analyse);
                 E_MOTION.setText(" ");
                 Analyse.setText(click);
-                thread.start();
                 GRAPHIC_OVERLAY.clear();
                 CAMERA_VIEW.stop();
                 return true;
@@ -415,8 +418,8 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO SAVE_TOSD IMAGE:
     private void CAPTURE_DATA_SAVE() {
-        //bitmap = ScreenGrab.getInstance().takeScreenshotForView();
-        bitmap = ScreenGrab.getInstance().takeScreenshotForScreen(activity);
+        bitmap = ScreenGrab.getInstance().takeScreenshotForView(CAMERA_VIEW);
+        //bitmap = ScreenGrab.getInstance().takeScreenshotForScreen(activity);
     }
 
     @Override
@@ -424,7 +427,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestcode, resultcode, data);
 
         if (requestcode == CAMERA_REQUEST_CODE && resultcode == RESULT_OK){
-
             UPLOADING.show();
             Uri uri = data.getData();
             StorageReference filepath = CLOUD_STORAGE.child("FACES").child(uri.getLastPathSegment());

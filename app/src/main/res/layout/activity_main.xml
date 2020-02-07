@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -62,13 +63,13 @@
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
             android:layout_toStartOf="@+id/cal"
-            android:visibility="invisible"
             android:layout_toEndOf="@+id/textView3"
             android:foregroundGravity="top|right|fill"
             android:gravity="right"
             android:text="@string/n"
             android:textAlignment="center"
-            android:textColor="#E91E63" />
+            android:textColor="#E91E63"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/cal"
@@ -166,8 +167,8 @@
             android:id="@+id/buttonEMO"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:foreground="?android:attr/selectableItemBackground"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/StressLevel"
@@ -179,8 +180,8 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="30dp"
                 android:background="@mipmap/ok"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:button="@android:color/transparent"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:layout_constraintEnd_toStartOf="@+id/soso"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="181dp" />
@@ -191,8 +192,8 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="40dp"
                 android:background="@mipmap/soso"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:button="@android:color/transparent"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:layout_constraintEnd_toStartOf="@+id/presevere"
                 app:layout_constraintStart_toEndOf="@+id/ok"
                 tools:layout_editor_absoluteY="181dp" />
@@ -203,8 +204,8 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="50dp"
                 android:background="@mipmap/presevere"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:button="@android:color/transparent"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:layout_constraintEnd_toStartOf="@+id/severe"
                 app:layout_constraintStart_toEndOf="@+id/soso"
                 tools:layout_editor_absoluteY="181dp" />
@@ -213,10 +214,10 @@
                 android:id="@+id/severe"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginStart="38dp"
                 android:background="@mipmap/severe"
                 android:button="@android:color/transparent"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/presevere"
                 tools:layout_editor_absoluteY="181dp" />
@@ -231,8 +232,8 @@
             android:layout_marginBottom="2dp"
             android:background="@null"
             android:ems="10"
-            android:hint="@string/comment"
             android:focusableInTouchMode="true"
+            android:hint="@string/comment"
             android:importantForAutofill="no"
             android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
             android:maxLines="6"
