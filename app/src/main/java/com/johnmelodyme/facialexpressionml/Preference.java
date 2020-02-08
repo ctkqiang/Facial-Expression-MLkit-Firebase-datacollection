@@ -22,7 +22,7 @@ import dmax.dialog.SpotsDialog;
  */
 
 public class Preference extends AppCompatActivity {
-    private static final String TAG = Preference.class.getName();
+    private static final String TAG = "ML";
     private Switch ON_OFF_SCREEN;
     private TextView EmailToDev;
     private Button LOGOUT;

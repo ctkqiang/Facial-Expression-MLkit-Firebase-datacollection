@@ -21,7 +21,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.muddzdev.styleabletoast.StyleableToast;
-
 import dmax.dialog.SpotsDialog;
 
 /**
@@ -31,7 +30,7 @@ import dmax.dialog.SpotsDialog;
  */
 
 public class Login extends AppCompatActivity {
-    private static final String TAG = Login.class.getName();
+    private static final String TAG = "ML";
     private Button LOGIN;
     private EditText EMAIL, PASSWORD;
     private TextView FORGOTPASSWORD;
@@ -45,6 +44,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Log.d(TAG, "onCreate: LOGIN");
 
         LOGIN = findViewById(R.id.login_button);
         EMAIL = findViewById(R.id.email_login);
@@ -113,6 +113,7 @@ public class Login extends AppCompatActivity {
                                 Intent toMain;
                                 toMain = new Intent(Login.this, MainActivity.class);
                                 startActivity(toMain);
+                                Log.d(TAG, "onComplete: USER LOGIN SUCCEED");
                             } else {
                                 //ROTIBAKAR("Problem Login :(");
                                 new StyleableToast
@@ -150,7 +151,7 @@ public class Login extends AppCompatActivity {
                 PROMPT.setNegativeButton(Rem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogue, int ID) {
-                        Log.w(TAG, "FE " + "User Suddenly, magically remembered his/her password");
+                        Log.d(TAG,  "User Suddenly, magically remembered his/her password");
                     }
                 }).setPositiveButton(yes, new DialogInterface.OnClickListener() {
                     @Override

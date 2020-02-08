@@ -29,7 +29,7 @@ import dmax.dialog.SpotsDialog;
  */
 
 public class Register extends AppCompatActivity {
-    private static final String TAG = Register.class.getName();
+    private static final String TAG = "ML";
     private Button REGISTER;
     private TextView EXISTING, FORGOT_PASS;
     private EditText EMAIL, PASSWORD;
@@ -43,7 +43,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Log.d(TAG, "FE" + "onCreate: REGISTRATION");
+        Log.d(TAG, "onCreate: REGISTRATION");
 
         EXISTING = findViewById(R.id.existing);
         REGISTER = findViewById(R.id.register);
@@ -107,7 +107,7 @@ public class Register extends AppCompatActivity {
                                         .textColor(Color.WHITE)
                                         .backgroundColor(Color.rgb(255,20,147))
                                         .show();
-                                Log.d(TAG, "FE" + "onComplete: FIREBASE REGISTRATION =======> {ok} ");
+                                Log.d(TAG, "onComplete: FIREBASE REGISTRATION =======> {ok} ");
                             } else {
                                 //ROTIBAKAR("Registration Failed :( ");
                                 new StyleableToast
@@ -116,7 +116,7 @@ public class Register extends AppCompatActivity {
                                         .textColor(Color.WHITE)
                                         .backgroundColor(Color.rgb(255,20,147))
                                         .show();
-                                Log.d(TAG, "FE" + "onComplete: FIREBASE REGISTRATION =======> {failed} ");
+                                Log.d(TAG, "onComplete: FIREBASE REGISTRATION =======> {failed} ");
                                 // TODO : GUEST VERSION;
                             }
                         }
@@ -148,7 +148,7 @@ public class Register extends AppCompatActivity {
                 PROMPT.setNegativeButton(Rem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogue, int ID) {
-                        Log.d(TAG, "FE " + "User Suddenly, magically remembered his/her password");
+                        Log.d(TAG,  "User Suddenly, magically remembered his/her password");
                     }
                 }).setPositiveButton(yes, new DialogInterface.OnClickListener() {
                     @Override

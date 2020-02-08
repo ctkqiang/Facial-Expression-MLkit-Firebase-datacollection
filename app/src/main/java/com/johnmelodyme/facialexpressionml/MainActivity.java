@@ -28,11 +28,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,12 +65,10 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
-
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -83,7 +79,7 @@ import dmax.dialog.SpotsDialog;
  */
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "ML";
     private static final String FILE_NAME = "FacialExpressionDetectionResult.txt";
     private AppCompatActivity activity = MainActivity.this;
     private static final int CAMERA_REQUEST_CODE = 0x1;
@@ -98,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioGroup RG_Emotion;
     private Button Analyse;
     private FrameLayout parentView;
-    private TextView Emotion_result, ACCURACY, E_MOTION, EMOJI;
+    private TextView Emotion_result, ACCURACY, E_MOTION, EMOJI, EMOJI_RESULT;
     private Bitmap bitmap;
     Thread thread, g;
     private String E;
@@ -116,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: Starting Application.");
-
         TEXT_TO_SPEECH = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int STATUS) {
@@ -150,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
         CLOUD_STORAGE = FirebaseStorage.getInstance().getReference();
         FIREBASEAUTH = FirebaseAuth.getInstance();
+        EMOJI_RESULT = findViewById(R.id.emoji_result);
         Emotion_result = findViewById(R.id.emotion);
         CAMERA_VIEW = findViewById(R.id.CAMERA);
         GRAPHIC_OVERLAY = findViewById(R.id.GO);
@@ -215,7 +211,6 @@ public class MainActivity extends AppCompatActivity {
         thread.start();
         //thread.stop();
 
-
         CAMERA_VIEW.addCameraKitListener(new CameraKitEventListener() {
             @Override
             public void onEvent(CameraKitEvent cameraKitEvent) {
@@ -272,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
                 DONE = v.getResources().getString(R.string.analyse_after_done);
                 load = v.getResources().getString(R.string.analyse_after);
                 // TODO SAVE_TOSD:
-                CAPTURE_DATA_SAVE();
+                //CAPTURE_DATA_SAVE();
                 CAMERA_VIEW.start();
                 CAMERA_VIEW.captureImage();
                 GRAPHIC_OVERLAY.clear();
@@ -333,10 +328,11 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.d(TAG, " classification :: null");
                 }
-
                 Log.d(TAG,  " User is :  " + E);
                 EMOJI.setText("User is :  " + "\"" + E + "\"");
+                Show_EMOJI();
                 thread.interrupt();
+                CAPTURE_DATA_SAVE();
                 // TODO EXTERN:
                 SAVE_TO_SD();
             }
@@ -355,14 +351,23 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }//TODO SHOW EMOJI:
+    private void Show_EMOJI() {
+        if (E.equals("Happy \uD83D\uDE0A")){
+            EMOJI_RESULT.setText("\uD83D\uDE0A");
+        } else if (E.equals("Sad \uD83D\uDE25")){
+            EMOJI_RESULT.setText("\uD83D\uDE25");
+        } else if (E.equals("Horny \uD83D\uDE08")){
+            EMOJI_RESULT.setText("\uD83D\uDE08");
+        }
     }
 
     private void AI_SAY() {
         AI_SAY = MediaPlayer.create(MainActivity.this, R.raw.analyzing);
-        AI_SAY.start();
+        AI_SAY.setVolume(0x64, 0x64);
         AI_SAY.start();
         AI_SAY.stop();
-        Log.d(TAG, "AI_SAY: ====> ");
+        Log.d(TAG, "AI_SAY: ====> {ANALYZING............}");
     }
 
     private void SAVE_TO_SD() {
@@ -425,7 +430,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // TODO SAVE_TOIMAGE:
+    // TODO SAVE_TO_IMAGE:
     private void CAPTURE_DATA_SAVE() {
         bitmap = ScreenGrab.getInstance().takeScreenshotForView(CAMERA_VIEW);
         //bitmap = ScreenGrab.getInstance().takeScreenshotForScreen(activity);
@@ -527,6 +532,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.signout) {
+            Log.d(TAG, "onOptionsItemSelected: LOGGING OUT....");
             ALERT_PROMPT.show();
             FirebaseAuth.AuthStateListener AUTH;
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -556,15 +562,16 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.SwitchCamera) {
             if (CAMERA_VIEW.isFacingFront()) {
                 CAMERA_VIEW.setFacing(CameraKit.Constants.FACING_BACK);
-                Log.d(TAG, "FE" + "onclick():<> Camera is now facing the BACK ==> {ok} ");
+                Log.d(TAG, "onclick():<> Camera is now facing the BACK ==> {ok} ");
             } else {
                 CAMERA_VIEW.setFacing(CameraKit.Constants.FACING_FRONT);
-                Log.d(TAG, "FE" + "onclick():<>  Camera is now facing the Front ==> {ok} ");
+                Log.d(TAG, "onclick():<>  Camera is now facing the Front ==> {ok} ");
             }
             return true;
         }
 
         if (id == R.id.about) {
+            Log.d(TAG, "onOptionsItemSelected: \"Developed by John Melody Melissa\" ");
             new SweetAlertDialog(MainActivity.this)
                     .setTitleText("Version 1.0.0")
                     .setContentText("Developed by John Melody Melissa")
@@ -576,6 +583,7 @@ public class MainActivity extends AppCompatActivity {
             CAMERA_VIEW.start();
             CAMERA_VIEW.captureImage();
             GRAPHIC_OVERLAY.clear();
+            Log.d(TAG, "onOptionsItemSelected: FREEZE");
             return false;
         }
 
@@ -583,6 +591,7 @@ public class MainActivity extends AppCompatActivity {
             Intent SETTING;
             SETTING = new Intent(MainActivity.this, Preference.class);
             startActivity(SETTING);
+            Log.d(TAG, "onOptionsItemSelected: SETTING");
             return true;
         }
 
