@@ -359,6 +359,20 @@ public class MainActivity extends AppCompatActivity {
             EMOJI_RESULT.setText("\uD83D\uDE25");
         } else if (E.equals("Horny \uD83D\uDE08")){
             EMOJI_RESULT.setText("\uD83D\uDE08");
+        } else if (E.equals("Disgust \uD83D\uDE35")){
+            EMOJI_RESULT.setText("\uD83D\uDE35");
+        } else if (E.equals("Surprised \uD83D\uDE32")){
+            EMOJI_RESULT.setText("\uD83D\uDE32");
+        } else if (E.equals("Tired \uD83D\uDE2A")){
+            EMOJI_RESULT.setText("\uD83D\uDE2A");
+        } else if (E.equals("Angry \uD83D\uDE21")){
+            EMOJI_RESULT.setText("\uD83D\uDE21");
+        } else if (E.equals("Confused \uD83E\uDD14")){
+            EMOJI_RESULT.setText("\uD83E\uDD14");
+        } else if (E.equals("Neutral \uD83D\uDE10")){
+            EMOJI_RESULT.setText("\uD83D\uDE10");
+        } else {
+            Log.d(TAG, "NO EMOTION.....");
         }
     }
 
