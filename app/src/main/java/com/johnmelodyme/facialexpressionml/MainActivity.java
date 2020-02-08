@@ -371,7 +371,9 @@ public class MainActivity extends AppCompatActivity {
             EMOJI_RESULT.setText("\uD83E\uDD14");
         } else if (E.equals("Neutral \uD83D\uDE10")){
             EMOJI_RESULT.setText("\uD83D\uDE10");
-        } else {
+        } else if (E.equals("Excited \uD83D\uDE32")){
+            EMOJI_RESULT.setText("\uD83D\uDE32");
+        }else {
             Log.d(TAG, "NO EMOTION.....");
         }
     }

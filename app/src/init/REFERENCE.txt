@@ -7,3 +7,4 @@ https://www.ssaurel.com/blog/create-a-real-time-line-graph-in-android-with-graph
 https://www.journaldev.com/9400/android-external-storage-read-write-save-file [Text]
 https://machinelearningmastery.com/tensorflow-tutorial-deep-learning-with-tf-keras/ [ML]
 http://www.androidtutorialshub.com/android-take-screenshot-programmatically/ [SCREENSHOT]
+https://developer.android.com/training/system-ui/immersive [Fullscreen]
