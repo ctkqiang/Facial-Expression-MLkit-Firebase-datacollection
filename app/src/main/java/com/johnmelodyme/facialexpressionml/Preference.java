@@ -13,6 +13,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import dmax.dialog.SpotsDialog;
 
 /**
@@ -51,6 +53,9 @@ public class Preference extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preference);
+        FirebaseUser USER;
+        USER = FIREBASEAUTH.getCurrentUser();
+        FirebaseAuth.getInstance().getCurrentUser();
         FIREBASEAUTH = FirebaseAuth.getInstance();
         ALERT_PROMPT = new SpotsDialog
                 .Builder()

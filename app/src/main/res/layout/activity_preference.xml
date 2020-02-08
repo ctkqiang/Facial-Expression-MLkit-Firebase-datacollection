@@ -79,11 +79,13 @@
             android:id="@+id/emailus"
             android:layout_width="match_parent"
             android:layout_height="29dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="monospace"
             android:foreground="?android:attr/selectableItemBackground"
             android:text="@string/report"
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UnusedAttribute" />
