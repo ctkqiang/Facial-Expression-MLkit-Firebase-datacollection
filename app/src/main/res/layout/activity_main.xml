@@ -83,7 +83,7 @@
     </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="408dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -214,7 +214,7 @@
                 android:id="@+id/severe"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="38dp"
+                android:layout_marginStart="30dp"
                 android:background="@mipmap/severe"
                 android:button="@android:color/transparent"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -223,43 +223,21 @@
                 tools:layout_editor_absoluteY="181dp" />
         </RadioGroup>
 
-        <EditText
-            android:id="@+id/Comment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="2dp"
-            android:background="@null"
-            android:ems="10"
-            android:focusableInTouchMode="true"
-            android:hint="@string/comment"
-            android:importantForAutofill="no"
-            android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
-            android:maxLines="6"
-            android:minLines="3"
-            app:layout_constraintBottom_toTopOf="@+id/analyse"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
         <Button
             android:id="@+id/analyse"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="3dp"
             android:background="@drawable/ripple_effect"
             android:text="@string/analyse"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Comment" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/e_motion"
-            android:layout_width="197dp"
+            android:layout_width="0dp"
             android:layout_height="24dp"
             android:layout_marginEnd="16dp"
             android:textColor="@color/colorAccent"
@@ -301,7 +279,7 @@
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
-            android:layout_width="257dp"
+            android:layout_width="0dp"
             android:layout_height="87dp"
             android:layout_marginEnd="15dp"
             android:foreground="?android:attr/selectableItemBackground"

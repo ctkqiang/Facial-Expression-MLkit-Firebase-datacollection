@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -100,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
     private Button Analyse;
     private FrameLayout parentView;
     private TextView Emotion_result, ACCURACY, E_MOTION, EMOJI;
-    private EditText COMMENT;
     private Bitmap bitmap;
     Thread thread, g;
     private String E;
@@ -161,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
         RADsad = findViewById(R.id.Sad);
         RADother = findViewById(R.id.Other);
         RG_Emotion = findViewById(R.id.RADIO_GROUP_EMOTION);
-        COMMENT = findViewById(R.id.Comment);
         OK = findViewById(R.id.ok);
         SOSO = findViewById(R.id.soso);
         Pre_Severe = findViewById(R.id.presevere);
@@ -211,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 } catch (InterruptedException e) {
-                    Emotion_result.setText("");
+                    //Emotion_result.setText("");
                 }
             }
         };
@@ -590,9 +587,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.export){
-            Intent export;
-            export = new Intent(MainActivity.this, Data_list.class);
-            startActivity(export);
             return true;
         }
 
