@@ -106,7 +106,7 @@ public class Login extends AppCompatActivity {
                                 //ROTIBAKAR("Welcome back " + user);
                                 new StyleableToast
                                         .Builder(Login.this)
-                                        .text("Welcome back " + user)
+                                        .text("Welcome back " + user.getEmail())
                                         .textColor(Color.WHITE)
                                         .backgroundColor(Color.rgb(255,20,147))
                                         .show();

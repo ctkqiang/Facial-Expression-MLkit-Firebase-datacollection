@@ -103,7 +103,7 @@ public class Register extends AppCompatActivity {
                                 //ROTIBAKAR(String.valueOf(FIREBASEAUTH.getCurrentUser()));
                                 new StyleableToast
                                         .Builder(Register.this)
-                                        .text(String.valueOf(FIREBASEAUTH.getCurrentUser()))
+                                        .text(String.valueOf(FIREBASEAUTH.getCurrentUser().getEmail()))
                                         .textColor(Color.WHITE)
                                         .backgroundColor(Color.rgb(255,20,147))
                                         .show();

@@ -57,6 +57,7 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
+    <string name="user_profile">Profile</string>
     <string name="disp">Display</string>
     <string name="disp_LP">Force Landscape/Portrait mode</string>
     <string name="On">On</string>
@@ -64,7 +65,6 @@
     <string name="Other">Other</string>
     <string name="report">Email To Developer</string>
     <string name="prediction">Prediction: </string>
-
     <string name="save_img">Data Successfully Saved to </string>
     <string name="save_img_failed">Data Failed To Save. </string>
     <string name="sdx_grant_storage">Go to Permissions to Grant Storage</string>

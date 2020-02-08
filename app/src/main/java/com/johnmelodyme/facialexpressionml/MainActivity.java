@@ -615,6 +615,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.Profile){
+            Intent toProfile;
+            toProfile = new Intent(MainActivity.this, UserProfile.class);
+            startActivity(toProfile);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

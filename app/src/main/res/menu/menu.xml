@@ -15,6 +15,12 @@
         app:showAsAction="ifRoom"/>
 
     <item
+        android:id="@+id/Profile"
+        android:icon="@drawable/ic_people_black_24dp"
+        android:title="@string/user_profile"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/export"
         android:icon="@drawable/ic_share_black_24dp"
         android:title="@string/Share"

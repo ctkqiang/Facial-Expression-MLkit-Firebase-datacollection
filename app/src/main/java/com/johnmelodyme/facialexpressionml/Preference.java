@@ -55,7 +55,6 @@ public class Preference extends AppCompatActivity {
         setContentView(R.layout.activity_preference);
         FirebaseUser USER;
         USER = FIREBASEAUTH.getCurrentUser();
-        FirebaseAuth.getInstance().getCurrentUser();
         FIREBASEAUTH = FirebaseAuth.getInstance();
         ALERT_PROMPT = new SpotsDialog
                 .Builder()

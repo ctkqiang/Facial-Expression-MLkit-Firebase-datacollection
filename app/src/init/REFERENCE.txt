@@ -8,3 +8,9 @@ https://www.journaldev.com/9400/android-external-storage-read-write-save-file [T
 https://machinelearningmastery.com/tensorflow-tutorial-deep-learning-with-tf-keras/ [ML]
 http://www.androidtutorialshub.com/android-take-screenshot-programmatically/ [SCREENSHOT]
 https://developer.android.com/training/system-ui/immersive [Fullscreen]
+https://github.com/trulymittal/FirebaseNotesApp/blob/master/app/src/main/java/com/example/notesapp/ProfileActivity.java [---]
+
+
+
+[QUESTION]
+https://www.quora.com/How-do-I-screenGrab-CameraView-using-Bitmap-Android-Java/answer/John-Melody-Mel []
