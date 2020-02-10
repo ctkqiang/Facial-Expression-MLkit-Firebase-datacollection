@@ -4,7 +4,6 @@ package com.johnmelodyme.facialexpressionml;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;

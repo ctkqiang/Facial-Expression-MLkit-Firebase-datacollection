@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".UserProfile"></activity>
+        <activity android:name=".UserProfile"/>
         <activity android:name=".Preference" />
         <activity
             android:name=".Register"
@@ -57,6 +57,9 @@
         <meta-data
             android:name="android.app.shortcuts"
             android:resource="@xml/shortcut" />
+        <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" />
     </application>
 
 </manifest>
