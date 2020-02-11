@@ -9,6 +9,8 @@ https://machinelearningmastery.com/tensorflow-tutorial-deep-learning-with-tf-ker
 http://www.androidtutorialshub.com/android-take-screenshot-programmatically/ [SCREENSHOT]
 https://developer.android.com/training/system-ui/immersive [Fullscreen]
 https://github.com/trulymittal/FirebaseNotesApp/blob/master/app/src/main/java/com/example/notesapp/ProfileActivity.java [---]
+https://dzone.com/articles/machine-learning-in-android-using-firebase-ml-kit [ML]
+https://www.androidauthority.com/firebase-ml-kit-916548/ [ML-KIT-FACIAL]
 
 
 

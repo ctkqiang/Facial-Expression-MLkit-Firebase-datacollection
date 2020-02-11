@@ -4,6 +4,7 @@ package com.johnmelodyme.facialexpressionml;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -27,9 +28,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.camerakit.CameraKitView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,10 +68,12 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -88,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
     private android.app.AlertDialog ALERT_PROMPT, LOADING, UPLOADING;
     private FirebaseAuth FIREBASEAUTH;
     private CameraView CAMERA_VIEW;
+    private CameraKitView CAMERA_KIT;
     private GraphicOverlay GRAPHIC_OVERLAY;
     private RadioButton OK, SOSO, Pre_Severe, Severe, RADhappy, RADsad, RADneutral, RADother;
     private RadioGroup RG_Emotion;
@@ -231,7 +238,11 @@ public class MainActivity extends AppCompatActivity {
                 CAMERA_VIEW.stop();
                 PROCESS_FACE_DETECTION(bitmap);
                 Log.d(TAG, "onImage: CAMERAVIEW is Running");
+                CAPTURE_DATA_SAVE();
+                // TODO EXTERN:
+                SAVE_TO_SD();
             }
+
             @Override
             public void onVideo(CameraKitVideo cameraKitVideo) {
             }
@@ -265,17 +276,11 @@ public class MainActivity extends AppCompatActivity {
 
                 DONE = v.getResources().getString(R.string.analyse_after_done);
                 load = v.getResources().getString(R.string.analyse_after);
-                // TODO SAVE_TOSD:
+                // TODO SAVE_TO_SD:
                 //CAPTURE_DATA_SAVE();
                 CAMERA_VIEW.start();
-                CAMERA_VIEW.captureImage();
                 GRAPHIC_OVERLAY.clear();
                 Analyse.setText(load);
-//              if (!OK.isChecked() || !SOSO.isChecked() || !Pre_Severe.isChecked() || !Severe.isChecked()){
-//                    ROTIBAKAR("Please Select Your Emotion");
-//              } else if (!RADhappy.isChecked() || !RADsad.isChecked() || !RADneutral.isChecked() || !RADother.isChecked()){
-//                    ROTIBAKAR("Please Select Your Stress Level");
-//              } else {}
                 if (OK.isChecked() || RADhappy.isChecked()) {
                     Analyse.setText(DONE);
                     E_MOTION.setText("Stress-Level: 0%");
@@ -331,6 +336,7 @@ public class MainActivity extends AppCompatActivity {
                 EMOJI.setText("User is :  " + "\"" + E + "\"");
                 Show_EMOJI();
                 thread.interrupt();
+                //CAPTURE_PICTURE_FROM_CAMERA_VIEW();
                 CAPTURE_DATA_SAVE();
                 // TODO EXTERN:
                 SAVE_TO_SD();
@@ -351,6 +357,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }//TODO SHOW EMOJI:
+
+    // TODO CAPTURE IMAGE:
+//    private void CAPTURE_PICTURE_FROM_CAMERA_VIEW() {
+//        CAMERA_VIEW.captureImage(new CameraView ){
+//            @Override
+//            public void callback(CameraKitImage cameraKitImage, final byte[] photo) {
+//                File SavePhoto;
+//                SavePhoto = new File(Environment.getExternalStorageState(), "User_data_output.png");
+//                FileOutputStream outputStream;
+//                try {
+//                    outputStream = new FileOutputStream(SavePhoto.getPath());
+//                    outputStream.write();
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
+
     private void Show_EMOJI() {
         if (E.equals("Happy \uD83D\uDE0A")){
             EMOJI_RESULT.setText("\uD83D\uDE0A");
@@ -447,6 +472,7 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO SAVE_TO_IMAGE:
     private void CAPTURE_DATA_SAVE() {
+        CAMERA_VIEW.captureImage();
         bitmap = ScreenGrab.getInstance().takeScreenshotForView(CAMERA_VIEW);
         //bitmap = ScreenGrab.getInstance().takeScreenshotForScreen(activity);
         Log.d(TAG, "CAPTURE_DATA_SAVE:  IMAGE CAPTURED");

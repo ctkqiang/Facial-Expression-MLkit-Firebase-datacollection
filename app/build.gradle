@@ -46,7 +46,7 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
     //implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
     //CAMERA KIT :
-    //implementation 'com.camerakit:camerakit:1.0.0-beta3.11'
+    implementation 'com.camerakit:camerakit:1.0.0-beta3.11'
     //implementation 'com.camerakit:jpegkit:0.1.0'
     implementation 'com.wonderkiln:camerakit:0.13.1'
     // Dialogue:
