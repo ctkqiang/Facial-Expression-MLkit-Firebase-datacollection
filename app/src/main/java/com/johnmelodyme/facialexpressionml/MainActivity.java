@@ -557,6 +557,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // TODO GET_FACE_RESULT:
     private void getFaceResult(List<FirebaseVisionFace> firebaseVisionFaces) {
         int COUNTER = 0x0;
         for (FirebaseVisionFace visionFace : firebaseVisionFaces) {

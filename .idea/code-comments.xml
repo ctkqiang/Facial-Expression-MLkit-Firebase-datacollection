@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CodeComments">
-    <comments />
+    <comments>
+      <comment>
+        <place path="app/src/init/start_firebase.bat" from="20" to="20" />
+        <text />
+        <data>test</data>
+      </comment>
+    </comments>
   </component>
 </project>
