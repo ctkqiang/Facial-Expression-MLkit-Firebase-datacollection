@@ -28,11 +28,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.camerakit.CameraKitView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -68,12 +66,10 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
-
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -118,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: Starting Application.");
+        // TODO TEXT TO SPEECH:
         TEXT_TO_SPEECH = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int STATUS) {
@@ -127,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         ALERT_PROMPT = new SpotsDialog
                 .Builder()
                 .setContext(MainActivity.this)
@@ -147,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage("Loading...")
                 .setCancelable(false)
                 .build();
-
 
         CLOUD_STORAGE = FirebaseStorage.getInstance().getReference();
         FIREBASEAUTH = FirebaseAuth.getInstance();
@@ -182,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         Data = getResources().getStringArray(R.array.emo);
         D = new Random().nextInt(Data.length);
         E = Data[D];
+        //TODO THREAD:
         thread = new Thread() {
             @Override
             public void run() {
@@ -217,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
         thread.start();
         //thread.stop();
 
+        // TODO CAMERA_VIEW.ADD_CAMERA_LISTENER:
         CAMERA_VIEW.addCameraKitListener(new CameraKitEventListener() {
             @Override
             public void onEvent(CameraKitEvent cameraKitEvent) {
@@ -248,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // TODO CAMERA_VIEW ON CLICK:
         CAMERA_VIEW.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -258,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // TODO ANALYSE ONCLICK:
         Analyse.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -356,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-    }//TODO SHOW EMOJI:
+    }
 
     // TODO CAPTURE IMAGE:
 //    private void CAPTURE_PICTURE_FROM_CAMERA_VIEW() {
@@ -376,6 +377,7 @@ public class MainActivity extends AppCompatActivity {
 //        });
 //    }
 
+    //TODO SHOW EMOJI:
     private void Show_EMOJI() {
         if (E.equals("Happy \uD83D\uDE0A")){
             EMOJI_RESULT.setText("\uD83D\uDE0A");
@@ -402,6 +404,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // TODO AI_SAY
     private void AI_SAY() {
         AI_SAY = MediaPlayer.create(MainActivity.this, R.raw.analyzing);
         AI_SAY.setVolume(0x64, 0x64);
@@ -410,6 +413,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "AI_SAY: ====> {ANALYZING............}");
     }
 
+    // TODO SAVETOSD:
     private void SAVE_TO_SD() {
         /*
          * TODO SAVE_IMG_TO_PATH
@@ -522,6 +526,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // TODO PROCESS_FACE_DETECTION:
     private void PROCESS_FACE_DETECTION(Bitmap bitmap) {
         FirebaseVisionImage firebaseVisionImage;
         firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap);

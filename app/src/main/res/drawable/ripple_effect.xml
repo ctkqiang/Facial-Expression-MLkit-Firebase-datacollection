@@ -10,5 +10,4 @@
             <corners android:radius="9dp"/>
         </shape>
     </item>
-
 </ripple>
