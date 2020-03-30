@@ -34,7 +34,7 @@ public class splash extends AppCompatActivity {
             @Override
             public void run() {
                 Intent toRegister;
-                toRegister = new Intent(splash.this, Register.class);
+                toRegister = new Intent(splash.this, FaceExpressionActivity.class);
                 startActivity(toRegister);
             }
         },DELAY_TIME);

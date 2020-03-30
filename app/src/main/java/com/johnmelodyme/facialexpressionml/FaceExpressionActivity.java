@@ -66,10 +66,12 @@ import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
@@ -79,10 +81,10 @@ import dmax.dialog.SpotsDialog;
  * @INPIREDBYGF : Sin Dee <3
  */
 
-public class MainActivity extends AppCompatActivity {
+public class FaceExpressionActivity extends AppCompatActivity {
     private static final String TAG = "ML";
     private static final String FILE_NAME = "FacialExpressionDetectionResult.txt";
-    private AppCompatActivity activity = MainActivity.this;
+    private AppCompatActivity activity = FaceExpressionActivity.this;
     private static final int CAMERA_REQUEST_CODE = 0x1;
     private StorageReference CLOUD_STORAGE;
     private TextToSpeech TEXT_TO_SPEECH;
@@ -127,21 +129,21 @@ public class MainActivity extends AppCompatActivity {
 
         ALERT_PROMPT = new SpotsDialog
                 .Builder()
-                .setContext(MainActivity.this)
+                .setContext(FaceExpressionActivity.this)
                 .setMessage("Logging Out...")
                 .setCancelable(false)
                 .build();
 
         UPLOADING = new SpotsDialog
                 .Builder()
-                .setContext(MainActivity.this)
+                .setContext(FaceExpressionActivity.this)
                 .setMessage("Uploading to the server...")
                 .setCancelable(false)
                 .build();
 
         LOADING = new SpotsDialog
                 .Builder()
-                .setContext(MainActivity.this)
+                .setContext(FaceExpressionActivity.this)
                 .setMessage("Loading...")
                 .setCancelable(false)
                 .build();
@@ -406,7 +408,7 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO AI_SAY
     private void AI_SAY() {
-        AI_SAY = MediaPlayer.create(MainActivity.this, R.raw.analyzing);
+        AI_SAY = MediaPlayer.create(FaceExpressionActivity.this, R.raw.analyzing);
         AI_SAY.setVolume(0x64, 0x64);
         AI_SAY.start();
         AI_SAY.stop();
@@ -421,7 +423,7 @@ public class MainActivity extends AppCompatActivity {
          * Once the permission granted, screen shot captured
          * On permanent denial show toast
          */
-        Dexter.withActivity(MainActivity.this).withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        Dexter.withActivity(FaceExpressionActivity.this).withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response) {
@@ -434,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
                             PATH_TO_STORAGE = Environment.getExternalStorageDirectory().toString() + "/user_data.png";
                             FileUtil.getInstance().storeBitmap(bitmap, PATH_TO_STORAGE);
                             new StyleableToast
-                                    .Builder(MainActivity.this)
+                                    .Builder(FaceExpressionActivity.this)
                                     .text(POS_MSG + "\t" + PATH_TO_STORAGE)
                                     .textColor(Color.WHITE)
                                     .backgroundColor(Color.rgb(255,20,147))
@@ -442,7 +444,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, "onPermissionGranted: " + POS_MSG + "\t" + PATH_TO_STORAGE);
                         } else {
                             new StyleableToast
-                                    .Builder(MainActivity.this)
+                                    .Builder(FaceExpressionActivity.this)
                                     .text(NEG_MSG)
                                     .textColor(Color.WHITE)
                                     .backgroundColor(Color.rgb(255,20,147))
@@ -456,7 +458,7 @@ public class MainActivity extends AppCompatActivity {
                         //Check for permanent denial of permission
                         if (USER_RESPONSE.isPermanentlyDenied()){
                             new StyleableToast
-                                    .Builder(MainActivity.this)
+                                    .Builder(FaceExpressionActivity.this)
                                     .text(getString(R.string.sdx_grant_storage))
                                     .textColor(Color.WHITE)
                                     .backgroundColor(Color.rgb(255,20,147))
@@ -496,7 +498,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     UPLOADING.dismiss();
                     new StyleableToast
-                            .Builder(MainActivity.this)
+                            .Builder(FaceExpressionActivity.this)
                             .text("Exported to the database...{ok}")
                             .textColor(Color.WHITE)
                             .backgroundColor(Color.rgb(255,20,147))
@@ -507,7 +509,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     UPLOADING.dismiss();
                     new StyleableToast
-                            .Builder(MainActivity.this)
+                            .Builder(FaceExpressionActivity.this)
                             .text("404: Server Error :( ")
                             .textColor(Color.WHITE)
                             .backgroundColor(Color.rgb(255,20,147))
@@ -547,7 +549,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception exception) {
                 //ROTIBAKAR("Error: " + exception.getMessage());
                 new StyleableToast
-                        .Builder(MainActivity.this)
+                        .Builder(FaceExpressionActivity.this)
                         .text("Error: " + exception.getMessage())
                         .textColor(Color.WHITE)
                         .backgroundColor(Color.rgb(0xff, 0x14, 0x93))
@@ -586,7 +588,7 @@ public class MainActivity extends AppCompatActivity {
             FIREBASEAUTH.signOut();
             FirebaseAuth.getInstance().signOut();
             Intent backtologin;
-            backtologin = new Intent(MainActivity.this, Login.class);
+            backtologin = new Intent(FaceExpressionActivity.this, Login.class);
             startActivity(backtologin);
             finish();
             /*
@@ -619,7 +621,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.about) {
             Log.d(TAG, "onOptionsItemSelected: \"Developed by John Melody Melissa\" ");
-            new SweetAlertDialog(MainActivity.this)
+            new SweetAlertDialog(FaceExpressionActivity.this)
                     .setTitleText("Version 1.0.0")
                     .setContentText("Developed by John Melody Melissa")
                     .show();
@@ -636,7 +638,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.Setting) {
             Intent SETTING;
-            SETTING = new Intent(MainActivity.this, Preference.class);
+            SETTING = new Intent(FaceExpressionActivity.this, Preference.class);
             startActivity(SETTING);
             Log.d(TAG, "onOptionsItemSelected: SETTING");
             return true;
@@ -648,7 +650,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.Profile){
             Intent toProfile;
-            toProfile = new Intent(MainActivity.this, UserProfile.class);
+            toProfile = new Intent(FaceExpressionActivity.this, UserProfile.class);
             startActivity(toProfile);
             return true;
         }
@@ -657,7 +659,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ROTIBAKAR(String string) {
-        Toast.makeText(MainActivity.this, string,
+        Toast.makeText(FaceExpressionActivity.this, string,
                 Toast.LENGTH_SHORT)
                 .show();
     }
