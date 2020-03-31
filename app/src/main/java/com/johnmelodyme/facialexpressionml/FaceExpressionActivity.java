@@ -1,8 +1,29 @@
 package com.johnmelodyme.facialexpressionml;
 /*
- *  I Actually hate creating this app but My baby
+ * Copyright 2020 © John Melody Melissa
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ *  *  I Actually hate creating this app but My baby
  *  encourage me and say that I can ,
  *  SO I do So.
+ *
+ * @Author : John Melody Melissa
+ * @Copyright: John Melody Melissa & Tan Sin Dee © Copyright 2020
+ * @INPIREDBYGF: Cindy Tan <3
+ * @Class: FacialExpressionActivity.class
+ *
  */
 
 import android.Manifest;
@@ -75,15 +96,9 @@ import java.util.Random;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import dmax.dialog.SpotsDialog;
 
-/**
- * @Author : John Melody Melissa
- * @Copyright: John Melody Melissa  © Copyright 2020
- * @INPIREDBYGF : Sin Dee <3
- */
-
 public class FaceExpressionActivity extends AppCompatActivity {
-    private static final String TAG = "ML";
-    private static final String FILE_NAME = "FacialExpressionDetectionResult.txt";
+    public static final String TAG = "ML";
+    public static final String FILE_NAME = "FacialExpressionDetectionResult.txt";
     private AppCompatActivity activity = FaceExpressionActivity.this;
     private static final int CAMERA_REQUEST_CODE = 0x1;
     private StorageReference CLOUD_STORAGE;
@@ -115,7 +130,7 @@ public class FaceExpressionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate: Starting Application.");
+        Log.d(TAG, "onCreate: " + FaceExpressionActivity.class.getCanonicalName());
         // TODO TEXT TO SPEECH:
         TEXT_TO_SPEECH = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -284,6 +299,7 @@ public class FaceExpressionActivity extends AppCompatActivity {
                 CAMERA_VIEW.start();
                 GRAPHIC_OVERLAY.clear();
                 Analyse.setText(load);
+                AI_SAY();
                 if (OK.isChecked() || RADhappy.isChecked()) {
                     Analyse.setText(DONE);
                     E_MOTION.setText("Stress-Level: 0%");
@@ -343,6 +359,7 @@ public class FaceExpressionActivity extends AppCompatActivity {
                 CAPTURE_DATA_SAVE();
                 // TODO EXTERN:
                 SAVE_TO_SD();
+                EXPORT_TXT();
             }
         });
 
@@ -359,6 +376,10 @@ public class FaceExpressionActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    // TODO exportTXT
+    public void EXPORT_TXT() {
     }
 
     // TODO CAPTURE IMAGE:
@@ -380,7 +401,7 @@ public class FaceExpressionActivity extends AppCompatActivity {
 //    }
 
     //TODO SHOW EMOJI:
-    private void Show_EMOJI() {
+    public void Show_EMOJI() {
         if (E.equals("Happy \uD83D\uDE0A")){
             EMOJI_RESULT.setText("\uD83D\uDE0A");
         } else if (E.equals("Sad \uD83D\uDE25")){
@@ -407,7 +428,7 @@ public class FaceExpressionActivity extends AppCompatActivity {
     }
 
     // TODO AI_SAY
-    private void AI_SAY() {
+    public void AI_SAY() {
         AI_SAY = MediaPlayer.create(FaceExpressionActivity.this, R.raw.analyzing);
         AI_SAY.setVolume(0x64, 0x64);
         AI_SAY.start();
@@ -416,7 +437,7 @@ public class FaceExpressionActivity extends AppCompatActivity {
     }
 
     // TODO SAVETOSD:
-    private void SAVE_TO_SD() {
+    public void SAVE_TO_SD() {
         /*
          * TODO SAVE_IMG_TO_PATH
          * Requesting storage permission
@@ -477,7 +498,7 @@ public class FaceExpressionActivity extends AppCompatActivity {
 
 
     // TODO SAVE_TO_IMAGE:
-    private void CAPTURE_DATA_SAVE() {
+    public void CAPTURE_DATA_SAVE() {
         CAMERA_VIEW.captureImage();
         bitmap = ScreenGrab.getInstance().takeScreenshotForView(CAMERA_VIEW);
         //bitmap = ScreenGrab.getInstance().takeScreenshotForScreen(activity);
@@ -645,7 +666,8 @@ public class FaceExpressionActivity extends AppCompatActivity {
         }
 
         if (id == R.id.export){
-            return true;
+            EXPORT_TXT();
+            return false;
         }
 
         if (id == R.id.Profile){
