@@ -88,6 +88,10 @@ import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -99,7 +103,7 @@ import dmax.dialog.SpotsDialog;
 public class FaceExpressionActivity extends AppCompatActivity {
     public static final String TAG = "ML";
     public static final String FILE_NAME = "FacialExpressionDetectionResult.txt";
-    private AppCompatActivity activity = FaceExpressionActivity.this;
+    private AppCompatActivity GET_DIR = FaceExpressionActivity.this;
     private static final int CAMERA_REQUEST_CODE = 0x1;
     private StorageReference CLOUD_STORAGE;
     private TextToSpeech TEXT_TO_SPEECH;
@@ -116,7 +120,7 @@ public class FaceExpressionActivity extends AppCompatActivity {
     private TextView Emotion_result, ACCURACY, E_MOTION, EMOJI, EMOJI_RESULT;
     private Bitmap bitmap;
     Thread thread, g;
-    private String E;
+    private String E, S;
     private String[] Data;
     private int D;
     private Handler handler;
@@ -126,43 +130,7 @@ public class FaceExpressionActivity extends AppCompatActivity {
     private GraphView GRAPH;
     private LineGraphSeries<DataPoint> DATA;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate: " + FaceExpressionActivity.class.getCanonicalName());
-        // TODO TEXT TO SPEECH:
-        TEXT_TO_SPEECH = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int STATUS) {
-                if (TextToSpeech.ERROR != STATUS) {
-                    TEXT_TO_SPEECH.setLanguage(Locale.UK);
-                    Log.d(TAG, "onInit: TTS__STARTED");
-                }
-            }
-        });
-
-        ALERT_PROMPT = new SpotsDialog
-                .Builder()
-                .setContext(FaceExpressionActivity.this)
-                .setMessage("Logging Out...")
-                .setCancelable(false)
-                .build();
-
-        UPLOADING = new SpotsDialog
-                .Builder()
-                .setContext(FaceExpressionActivity.this)
-                .setMessage("Uploading to the server...")
-                .setCancelable(false)
-                .build();
-
-        LOADING = new SpotsDialog
-                .Builder()
-                .setContext(FaceExpressionActivity.this)
-                .setMessage("Loading...")
-                .setCancelable(false)
-                .build();
-
+    public void DeclarationInit(){
         CLOUD_STORAGE = FirebaseStorage.getInstance().getReference();
         FIREBASEAUTH = FirebaseAuth.getInstance();
         EMOJI_RESULT = findViewById(R.id.emoji_result);
@@ -196,6 +164,47 @@ public class FaceExpressionActivity extends AppCompatActivity {
         Data = getResources().getStringArray(R.array.emo);
         D = new Random().nextInt(Data.length);
         E = Data[D];
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Log.d(TAG, "onCreate: " + FaceExpressionActivity.class.getCanonicalName());
+        DeclarationInit();
+        // TODO TEXT TO SPEECH:
+        TEXT_TO_SPEECH = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int STATUS) {
+                if (TextToSpeech.ERROR != STATUS) {
+                    TEXT_TO_SPEECH.setLanguage(Locale.UK);
+                    Log.d(TAG, "onInit: TTS__STARTED");
+                }
+            }
+        });
+
+        ALERT_PROMPT = new SpotsDialog
+                .Builder()
+                .setContext(FaceExpressionActivity.this)
+                .setMessage("Logging Out...")
+                .setCancelable(false)
+                .build();
+
+        UPLOADING = new SpotsDialog
+                .Builder()
+                .setContext(FaceExpressionActivity.this)
+                .setMessage("Uploading to the server...")
+                .setCancelable(false)
+                .build();
+
+        LOADING = new SpotsDialog
+                .Builder()
+                .setContext(FaceExpressionActivity.this)
+                .setMessage("Loading...")
+                .setCancelable(false)
+                .build();
+
+
         //TODO THREAD:
         thread = new Thread() {
             @Override
@@ -212,7 +221,6 @@ public class FaceExpressionActivity extends AppCompatActivity {
                                 double classification;
                                 String[] Data;
                                 int D, COUNT;
-                                final String E, S;
                                 COUNT = 0x0;
                                 Data = getResources().getStringArray(R.array.emo);
                                 D = new Random().nextInt(Data.length);
@@ -378,8 +386,36 @@ public class FaceExpressionActivity extends AppCompatActivity {
         });
     }
 
-    // TODO exportTXT
+    // TODO exportTXT:
     public void EXPORT_TXT() {
+        FileOutputStream fos = null;
+        String CurrentDateTime;
+        CurrentDateTime = java.text.DateFormat.getDateTimeInstance().format(new Date());
+        File file =  new File(FaceExpressionActivity.this.getApplicationContext().getFilesDir(), FILE_NAME);
+        if (!file.exists()) {
+            file.mkdir();
+            //writer.append(CurrentDateTime).append("User is :  ").append("\"").append(E).append("\"").append("Accuracies: ").append(S);
+        }
+        try {
+          fos = openFileOutput(FILE_NAME, MODE_APPEND);
+          fos.write(Integer.parseInt(CurrentDateTime + "User is " + E + "," + "Accuracy:" + S));
+            new StyleableToast
+                    .Builder(FaceExpressionActivity.this)
+                    .text("Export Result to " + getFilesDir() + "/" + FILE_NAME)
+                    .textColor(Color.WHITE)
+                    .backgroundColor(Color.rgb(255,20,147))
+                    .show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     // TODO CAPTURE IMAGE:
@@ -641,10 +677,10 @@ public class FaceExpressionActivity extends AppCompatActivity {
         }
 
         if (id == R.id.about) {
-            Log.d(TAG, "onOptionsItemSelected: \"Developed by John Melody Melissa\" ");
+            Log.d(TAG, "onOptionsItemSelected: \"Developed by John Melody Melissa\" and Inspired by Sin Dee <3 ");
             new SweetAlertDialog(FaceExpressionActivity.this)
-                    .setTitleText("Version 1.0.0")
-                    .setContentText("Developed by John Melody Melissa")
+                    .setTitleText("Version 1.1.0")
+                    .setContentText("Developed by John Melody Melissa \n Inspired by Sin Dee")
                     .show();
             return true;
         }
